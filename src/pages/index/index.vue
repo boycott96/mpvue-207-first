@@ -1,126 +1,68 @@
 <template>
-  <div @click="clickHandle">
-
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
-
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
-      </div>
-    </div>
-
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" :value="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-
-    <div class="all">
-        <div class="left">
-        </div>
-        <div class="right">
-        </div>
-    </div>
-  </div>
+  <van-cell-group>
+    <van-field placeholder="请输入快件手机尾号" label="手机尾号" left-icon="phone" :border="false" :value="form.phone"></van-field>
+    <van-field value="" label="快递公司" left-icon="wap-home" :border="false" :value="form.company"
+               @click="activeSelect"></van-field>
+    <van-field label="收件日期" left-icon="calender-o" :border="false" :value="form.date"></van-field>
+    <van-field label="件数" left-icon="chart-trending-o" :border="false" :value="form.count"></van-field>
+    <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight"></van-field>
+    <van-button class="confirm-order" type="info" size="large">下单</van-button>
+    <!--快递公司下拉框-->
+    <van-popup :show="show" position="bottom" overlay>
+      <van-picker show-toolbar :columns="columns" @confirm="onConfirm" @cancel="show = false"></van-picker>
+    </van-popup>
+    <!--收件日期下拉框-快捷选择-->
+    <!--件数下拉框-快捷选择-->
+    <!--收件重量-快捷选择-->
+  </van-cell-group>
 </template>
 
 <script>
-import card from '@/components/card'
+  import card from "@/components/card";
 
-export default {
-  data () {
-    return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
-    }
-  },
-
-  components: {
-    card
-  },
-
-  methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
+  export default {
+    data() {
+      return {
+        //表单
+        form: {
+          phone: "",
+          company: "韵达快递",
+          date: "2019-3-31",
+          count: "1",
+          weight: "(0kg,5kg]"
+        },
+        //是否显示
+        show: false,
+        //选择下拉值
+        columns: ["韵达快递", "申通快递", "圆通快递", "天天快递", "顺丰快递", "德邦快递", "EMS"]
+      };
     },
-    clickHandle (ev) {
-      console.log('clickHandle:', ev)
-      // throw {message: 'custom test'}
-    }
-  },
 
-  created () {
-    // let app = getApp()
-  }
-}
+    components: {
+      card
+    },
+
+    methods: {
+      //激活选择菜单快递公司
+      activeSelect() {
+        this.show = true;
+      },
+
+      //确认选择公司
+      onConfirm(event) {
+        this.form.company = event.target.value;
+        this.show = false;
+      }
+
+
+    },
+
+    created() {
+      // let app = getApp()
+    }
+  };
 </script>
 
-<style scoped>
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+<style>
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 150px;
-}
-
-.form-control {
-  display: block;
-  padding: 0 12px;
-  margin-bottom: 5px;
-  border: 1px solid #ccc;
-}
-.all{
-  width:7.5rem;
-  height:1rem;
-  background-color:blue;
-}
-.all:after{
-  display:block;
-  content:'';
-  clear:both;
-}
-.left{
-  float:left;
-  width:3rem;
-  height:1rem;
-  background-color:red;
-}
-
-.right{
-  float:left;
-  width:4.5rem;
-  height:1rem;
-  background-color:green;
-}
 </style>
