@@ -2,23 +2,19 @@
   <van-cell-group>
     <van-field placeholder="请输入快件手机尾号" label="手机尾号" left-icon="phone" :border="false" :value="form.phone"></van-field>
 
-    <van-field value="" label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly @click="activeSelect"></van-field>
+    <van-field value="" label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly
+               @click="activeSelect"></van-field>
 
 
+    <van-field label="收件日期" left-icon="calender-o" :border="false" :value="form.currentDate" readonly
+               @click="activeDate"></van-field>
 
 
+    <van-field label="件数" left-icon="chart-trending-o" :border="false" :value="form.count" readonly
+               @click="activeCount"></van-field>
 
-    <van-field label="收件日期" left-icon="calender-o" :border="false" :value="form.currentDate" readonly @click="activeDate"></van-field>
-
-
-
-
-
-
-
-    <van-field label="件数" left-icon="chart-trending-o" :border="false" :value="form.count" readonly @click="activeCount"></van-field>
-
-    <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight" readonly @click="activeWeight"></van-field>
+    <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight" readonly
+               @click="activeWeight"></van-field>
 
     <van-button class="confirm-order" type="info" size="large">下单</van-button>
 
@@ -28,19 +24,17 @@
     </van-popup>
 
 
-
     <!--收件日期下拉框-快捷选择-->
     <van-popup :show="dateshow" position="bottom" overlay>
-      <van-datetime-picker :value="currentDate" type="date" :min-date="minDate" @confirm="onConfirmDate"
-                           @cancel="dateshow = false"/>
+      <van-datetime-picker :value="currentDate" type="date" :min-date="minDate"
+                           @confirm="onConfirmDate"
+                           @cancel="dateshow = false"></van-datetime-picker>
     </van-popup>
-
-
 
 
     <!--件数下拉框-快捷选择-->
     <van-popup :show="countshow" position="bottom" overlay>
-        <van-picker show-toolbar :columns="count" @confirm="onCount" @cancel="countshow = false"></van-picker>
+      <van-picker show-toolbar :columns="count" @confirm="onCount" @cancel="countshow = false"></van-picker>
     </van-popup>
     <!--收件重量-快捷选择-->
     <van-popup :show="weightshow" position="bottom" overlay>
@@ -60,7 +54,7 @@
         form: {
           phone: "",
           company: "韵达快递",
-          currentDate: '',
+          currentDate: "",
           count: "1",
           weight: "(0kg,5kg]"
         },
@@ -70,12 +64,12 @@
         show: false,
         //是否显示日期
         dateshow: false,
-        countshow:false,
-        weightshow:false,
+        countshow: false,
+        weightshow: false,
         //选择下拉值
         columns: ["韵达快递", "申通快递", "圆通快递", "天天快递", "顺丰快递", "德邦快递", "EMS"],
-        weight:["(0,5kg]","(6,10kg]"],
-        count:[1,2,3,4,5,6,7,8,9,10],
+        weight: ["(0,5kg]", "(6,10kg]"],
+        count: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       };
     },
 
@@ -85,8 +79,8 @@
 
     methods: {
       //选中日期
-      onConfirmDate(event){
-        console.log(event)
+      onConfirmDate(event) {
+        let time = new Date(event.mp.detail).toLocaleString();
 
       },
       //激活日期选择
@@ -97,28 +91,28 @@
       //激活选择菜单快递公司
       activeSelect() {
         this.show = true;
+        this.currentDate = new Date().getTime();
       },
 
       //激活件数选择器
-      activeCount(){
-        this.countshow=true;
+      activeCount() {
+        this.countshow = true;
       },
       //激活选择器
-      activeWeight(){
-        this.weightshow=true;
+      activeWeight() {
+        this.weightshow = true;
       },
-
 
 
       //确认件数
-      onCount(event){
-          this.form.count=event.target.value;
-          this.countshow=false;
+      onCount(event) {
+        this.form.count = event.target.value;
+        this.countshow = false;
       },
       //确认重量
-      onWeight(event){
-        this.form.weight=event.target.value;
-        this.weightshow=false;
+      onWeight(event) {
+        this.form.weight = event.target.value;
+        this.weightshow = false;
       },
 
 
@@ -126,7 +120,7 @@
       onConfirm(event) {
         this.form.company = event.target.value;
         this.show = false;
-      },
+      }
 
     },
 

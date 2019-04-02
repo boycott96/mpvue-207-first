@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "下单",
   "usingComponents": {
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
@@ -8,6 +9,5 @@
     "van-popup": "/static/vant/popup/index",
     "van-picker": "/static/vant/picker/index",
     "van-datetime-picker": "/static/vant/datetime-picker/index"
-
   }
 }
