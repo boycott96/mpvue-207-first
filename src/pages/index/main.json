@@ -8,5 +8,6 @@
     "van-popup": "/static/vant/popup/index",
     "van-picker": "/static/vant/picker/index",
     "van-datetime-picker": "/static/vant/datetime-picker/index"
+
   }
 }
