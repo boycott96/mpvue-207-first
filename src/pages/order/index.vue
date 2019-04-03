@@ -1,191 +1,172 @@
 <template>
   <van-tabs :active="active"@click="onChange">
     <van-tab title="全部订单">
+      <van-card
+        num="3"
+        price="2.00"
+        desc="描述信息"
+        title="韵达快递"
+        :thumb="imageURL"
+      >
+        <view slot="footer">
+          <van-button size="mini">删除</van-button>
+          <van-button size="mini" style="color: #07c160">去付款</van-button>
+        </view>
+      </van-card>
+      <!--<div class="div">-->
+        <!--<div class="div1">-->
+          <!--<div class="order-title-restaurantName">-->
+            <!--快递公司-->
+          <!--</div>-->
+          <!--<div class="order-title-state">-->
+            <!--付款状态-->
+          <!--</div>-->
+        <!--</div>-->
 
-      <div class="div">
-        <div class="div1">
-          <div class="order-title-restaurantName">
-            快递公司
-          </div>
-          <div class="order-title-state">
-            付款状态
-          </div>
-        </div>
+        <!--<div class="div2">-->
+          <!--<img src="/static/images/user.png">-->
+          <!--<div class="order-content-info">-->
+            <!--<div class="order-content-info-price">-->
+              <!--金额-->
+            <!--</div>-->
+            <!--<div class="order-content-info-date">-->
+              <!--日期 时间-->
+            <!--</div>-->
+            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="div2">
-          <img src="/static/images/user.png">
-          <div class="order-content-info">
-            <div class="order-content-info-price">
-              金额
-            </div>
-            <div class="order-content-info-date">
-              日期 时间
-            </div>
-            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
-          </div>
-        </div>
+        <!--<div class="div3">-->
+          <!--<div class="order-footer-orderAgain">删除</div>-->
+          <!--<div class="order-footer-goToComment">去评论</div>-->
+        <!--</div>-->
 
-        <div class="div3">
-          <div class="order-footer-orderAgain">删除</div>
-          <div class="order-footer-goToComment">去评论</div>
-        </div>
-
-      </div>
+      <!--</div>-->
 
 
-      <div class="div">
-        <div class="div1">
-          <div class="order-title-restaurantName">
-            快递公司
-          </div>
-          <div class="order-title-state">
-            付款状态
-          </div>
-        </div>
+      <!--<div class="div">-->
+        <!--<div class="div1">-->
+          <!--<div class="order-title-restaurantName">-->
+            <!--快递公司-->
+          <!--</div>-->
+          <!--<div class="order-title-state">-->
+            <!--付款状态-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="div2">
-          <img src="/static/images/user.png">
-          <div class="order-content-info">
-            <div class="order-content-info-price">
-              金额
-            </div>
-            <div class="order-content-info-date">
-              日期 时间
-            </div>
-            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
-          </div>
-        </div>
+        <!--<div class="div2">-->
+          <!--<img src="/static/images/user.png">-->
+          <!--<div class="order-content-info">-->
+            <!--<div class="order-content-info-price">-->
+              <!--金额-->
+            <!--</div>-->
+            <!--<div class="order-content-info-date">-->
+              <!--日期 时间-->
+            <!--</div>-->
+            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="div3">
-          <div class="order-footer-orderAgain">删除</div>
-          <div class="order-footer-goToComment">去评论</div>
-        </div>
+        <!--<div class="div3">-->
+          <!--<div class="order-footer-orderAgain">删除</div>-->
+          <!--<div class="order-footer-goToComment">去评论</div>-->
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
+
     </van-tab>
+
+
     <van-tab title="待付款">
-      <div class="div">
-        <div class="div1">
-          <div class="order-title-restaurantName">
-            快递公司
-          </div>
-          <div class="order-title-state">
-            付款状态
-          </div>
-        </div>
-
-        <div class="div2">
-          <img src="/static/images/user.png">
-          <div class="order-content-info">
-            <div class="order-content-info-price">
-              金额
-            </div>
-            <div class="order-content-info-date">
-              日期 时间
-            </div>
-            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
-          </div>
-        </div>
-
-        <div class="div3">
-          <div class="order-footer-orderAgain">删除</div>
-          <div class="order-footer-goToComment">去评论</div>
-        </div>
-
-      </div>
-
-
-      <div class="div">
-        <div class="div1">
-          <div class="order-title-restaurantName">
-            快递公司
-          </div>
-          <div class="order-title-state">
-            付款状态
-          </div>
-        </div>
-
-        <div class="div2">
-          <img src="/static/images/user.png">
-          <div class="order-content-info">
-            <div class="order-content-info-price">
-              金额
-            </div>
-            <div class="order-content-info-date">
-              日期 时间
-            </div>
-            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
-          </div>
-        </div>
-
-        <div class="div3">
-          <div class="order-footer-orderAgain">删除</div>
-          <div class="order-footer-goToComment">去评论</div>
-        </div>
-
-      </div>
+      <van-card
+        num="3"
+        price="2.00"
+        desc="描述信息"
+        title="韵达快递"
+        :thumb="imageURL"
+      >
+      <view slot="footer">
+        <van-button size="mini">删除</van-button>
+        <van-button size="mini" style="color: #07c160">去付款</van-button>
+      </view>
+      </van-card>
     </van-tab>
+
+
     <van-tab title="待评价">
-      <div class="div">
-        <div class="div1">
-          <div class="order-title-restaurantName">
-            快递公司
-          </div>
-          <div class="order-title-state">
-            付款状态
-          </div>
-        </div>
+      <van-card
+        num="3"
+        price="2.00"
+        desc="描述信息"
+        title="韵达快递"
 
-        <div class="div2">
-          <img src="/static/images/user.png">
-          <div class="order-content-info">
-            <div class="order-content-info-price">
-              金额
-            </div>
-            <div class="order-content-info-date">
-              日期 时间
-            </div>
-            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
-          </div>
-        </div>
+        :thumb="imageURL"
+      >
+        <view slot="footer">
+          <van-button size="mini">删除</van-button>
+          <van-button size="mini" style="color: #07c160">去评价</van-button>
+        </view>
+      </van-card>
+      <!--<div class="div">-->
+        <!--<div class="div1">-->
+          <!--<div class="order-title-restaurantName">-->
+            <!--快递公司-->
+          <!--</div>-->
+          <!--<div class="order-title-state">-->
+            <!--付款状态-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="div3">
-          <div class="order-footer-orderAgain">删除</div>
-          <div class="order-footer-goToComment">去评论</div>
-        </div>
+        <!--<div class="div2">-->
+          <!--<img src="/static/images/user.png">-->
+          <!--<div class="order-content-info">-->
+            <!--<div class="order-content-info-price">-->
+              <!--金额-->
+            <!--</div>-->
+            <!--<div class="order-content-info-date">-->
+              <!--日期 时间-->
+            <!--</div>-->
+            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
-      </div>
+        <!--<div class="div3">-->
+          <!--<div class="order-footer-orderAgain">删除</div>-->
+          <!--<div class="order-footer-goToComment">去评论</div>-->
+        <!--</div>-->
+
+      <!--</div>-->
 
 
-      <div class="div">
-        <div class="div1">
-          <div class="order-title-restaurantName">
-            快递公司
-          </div>
-          <div class="order-title-state">
-            付款状态
-          </div>
-        </div>
+      <!--<div class="div">-->
+        <!--<div class="div1">-->
+          <!--<div class="order-title-restaurantName">-->
+            <!--快递公司-->
+          <!--</div>-->
+          <!--<div class="order-title-state">-->
+            <!--付款状态-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="div2">
-          <img src="/static/images/user.png">
-          <div class="order-content-info">
-            <div class="order-content-info-price">
-              金额
-            </div>
-            <div class="order-content-info-date">
-              日期 时间
-            </div>
-            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
-          </div>
-        </div>
+        <!--<div class="div2">-->
+          <!--<img src="/static/images/user.png">-->
+          <!--<div class="order-content-info">-->
+            <!--<div class="order-content-info-price">-->
+              <!--金额-->
+            <!--</div>-->
+            <!--<div class="order-content-info-date">-->
+              <!--日期 时间-->
+            <!--</div>-->
+            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="div3">
-          <div class="order-footer-orderAgain">删除</div>
-          <div class="order-footer-goToComment">去评论</div>
-        </div>
+        <!--<div class="div3">-->
+          <!--<div class="order-footer-orderAgain">删除</div>-->
+          <!--<div class="order-footer-goToComment">去评论</div>-->
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
     </van-tab>
 
   </van-tabs>
@@ -195,7 +176,8 @@
   export default {
     data(){
       return {
-        active:1
+        active:1,
+        imageURL:"/static/images/sf.jpg"
       };
     },
     methods:{

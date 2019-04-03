@@ -16,6 +16,9 @@
     <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight" readonly
                @click="activeWeight"></van-field>
 
+    <van-field label="收件类型" left-icon="bag-o" :border="false" :value="form.weight" readonly
+               @click="activeWeight"></van-field>
+
     <van-button class="confirm-order" type="info" size="large">下单</van-button>
 
     <!--快递公司下拉框-->
@@ -54,7 +57,8 @@
           company: "韵达快递",
           currentDate: new Date().toLocaleString().substr(0, new Date().toLocaleString().indexOf(' ')),
           count: "1",
-          weight: "(0kg,5kg]"
+          weight: "(0kg,5kg]",
+          type:"服装鞋子"
         },
         currentDate: new Date().getTime(),
         minDate: new Date().getTime() - 15 * 24 * 60 * 60 * 1000,
