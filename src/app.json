@@ -1,9 +1,11 @@
 {
   "pages": [
+
     "pages/index/main",
     "pages/order/main",
     "pages/counter/main",
-    "pages/mine/main"
+    "pages/mine/main",
+    "pages/item/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

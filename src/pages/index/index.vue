@@ -16,8 +16,8 @@
     <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight" readonly
                @click="activeWeight"></van-field>
 
-    <van-field label="收件类型" left-icon="bag-o" :border="false" :value="form.weight" readonly
-               @click="activeWeight"></van-field>
+    <van-field label="收件类型" left-icon="bag-o" :border="false" :value="form.type" readonly
+               @click="activeType"></van-field>
 
     <van-button class="confirm-order" type="info" size="large">下单</van-button>
 
@@ -25,7 +25,10 @@
     <van-popup :show="show" position="bottom">
       <van-picker show-toolbar :columns="columns" @confirm="onConfirm" @cancel="show = false"></van-picker>
     </van-popup>
-
+    <!--收件类型 下拉框 -->
+    <van-popup :show="typeshow" position="bottom">
+      <van-picker show-toolbar :columns="type" @confirm="onType" @cancel="typeshow = false"></van-picker>
+    </van-popup>
 
     <!--收件日期下拉框-快捷选择-->
     <van-popup :show="dateshow" position="bottom">
@@ -71,10 +74,12 @@
         countshow: false,
         //重量下拉框控制
         weightshow: false,
+        typeshow:false,
         //选择下拉值
         columns: ["韵达快递", "申通快递", "圆通快递", "天天快递", "顺丰快递", "德邦快递", "EMS"],
         weight: ["(0,5kg]", "(6,10kg]"],
-        count: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        count: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        type:['服饰鞋子','洗发液类','化妆品','生活用品','电子产品','其它']
       };
     },
 
@@ -109,6 +114,10 @@
       activeWeight() {
         this.weightshow = true;
       },
+      //激活类型选择器
+      activeType(){
+        this.typeshow=true;
+      },
 
 
       //确认件数
@@ -120,6 +129,11 @@
       onWeight(event) {
         this.form.weight = event.target.value;
         this.weightshow = false;
+      },
+      //确认收件类型
+      onType(event){
+        this.form.type = event.target.value;
+        this.typeshow = false;
       },
 
 
