@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "订单管理",
+  "usingComponents": {
+    "van-row": "/static/vant/row/index",
+    "van-col": "/static/vant/col/index",
+    "van-button": "/static/vant/button/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-field": "/static/vant/field/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-picker": "/static/vant/picker/index",
+    "van-datetime-picker": "/static/vant/datetime-picker/index",
+    "van-nav-bar": "/static/vant/nav-bar/index",
+    "van-tab": "/static/vant/tab/index",
+    "van-tabs": "/static/vant/tabs/index"
+  }
+}

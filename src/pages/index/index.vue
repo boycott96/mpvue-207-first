@@ -19,25 +19,23 @@
     <van-button class="confirm-order" type="info" size="large">下单</van-button>
 
     <!--快递公司下拉框-->
-    <van-popup :show="show" position="bottom" overlay>
+    <van-popup :show="show" position="bottom">
       <van-picker show-toolbar :columns="columns" @confirm="onConfirm" @cancel="show = false"></van-picker>
     </van-popup>
 
 
     <!--收件日期下拉框-快捷选择-->
-    <van-popup :show="dateshow" position="bottom" overlay>
-      <van-datetime-picker :value="currentDate" type="date" :min-date="minDate"
+    <van-popup :show="dateshow" position="bottom">
+      <van-datetime-picker :value="currentDate" type="date" :max-date="maxDate" :min-date="minDate"
                            @confirm="onConfirmDate"
                            @cancel="dateshow = false"></van-datetime-picker>
     </van-popup>
-
-
     <!--件数下拉框-快捷选择-->
-    <van-popup :show="countshow" position="bottom" overlay>
+    <van-popup :show="countshow" position="bottom">
       <van-picker show-toolbar :columns="count" @confirm="onCount" @cancel="countshow = false"></van-picker>
     </van-popup>
     <!--收件重量-快捷选择-->
-    <van-popup :show="weightshow" position="bottom" overlay>
+    <van-popup :show="weightshow" position="bottom">
       <van-picker show-toolbar :columns="weight" @confirm="onWeight" @cancel="weightshow = false"></van-picker>
     </van-popup>
 
@@ -54,17 +52,20 @@
         form: {
           phone: "",
           company: "韵达快递",
-          currentDate: "",
+          currentDate: new Date().toLocaleString().substr(0, new Date().toLocaleString().indexOf(' ')),
           count: "1",
           weight: "(0kg,5kg]"
         },
         currentDate: new Date().getTime(),
-        minDate: new Date().getTime(),
+        minDate: new Date().getTime() - 15 * 24 * 60 * 60 * 1000,
+        maxDate: new Date().getTime(),
         //是否显示公司
         show: false,
         //是否显示日期
         dateshow: false,
+        //件数下拉框控制
         countshow: false,
+        //重量下拉框控制
         weightshow: false,
         //选择下拉值
         columns: ["韵达快递", "申通快递", "圆通快递", "天天快递", "顺丰快递", "德邦快递", "EMS"],
@@ -81,7 +82,9 @@
       //选中日期
       onConfirmDate(event) {
         let time = new Date(event.mp.detail).toLocaleString();
-
+        let subIndex = time.indexOf(' ');
+        this.form.currentDate = time.substr(0, subIndex);
+        this.dateshow = false;
       },
       //激活日期选择
       activeDate() {
@@ -125,7 +128,6 @@
     },
 
     created() {
-      // let app = getApp()
     }
   };
 </script>

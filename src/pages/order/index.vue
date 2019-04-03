@@ -1,0 +1,285 @@
+<template>
+  <van-tabs :active="active"@click="onChange">
+    <van-tab title="全部订单">
+
+      <div class="div">
+        <div class="div1">
+          <div class="order-title-restaurantName">
+            快递公司
+          </div>
+          <div class="order-title-state">
+            付款状态
+          </div>
+        </div>
+
+        <div class="div2">
+          <img src="/static/images/user.png">
+          <div class="order-content-info">
+            <div class="order-content-info-price">
+              金额
+            </div>
+            <div class="order-content-info-date">
+              日期 时间
+            </div>
+            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
+          </div>
+        </div>
+
+        <div class="div3">
+          <div class="order-footer-orderAgain">删除</div>
+          <div class="order-footer-goToComment">去评论</div>
+        </div>
+
+      </div>
+
+
+      <div class="div">
+        <div class="div1">
+          <div class="order-title-restaurantName">
+            快递公司
+          </div>
+          <div class="order-title-state">
+            付款状态
+          </div>
+        </div>
+
+        <div class="div2">
+          <img src="/static/images/user.png">
+          <div class="order-content-info">
+            <div class="order-content-info-price">
+              金额
+            </div>
+            <div class="order-content-info-date">
+              日期 时间
+            </div>
+            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
+          </div>
+        </div>
+
+        <div class="div3">
+          <div class="order-footer-orderAgain">删除</div>
+          <div class="order-footer-goToComment">去评论</div>
+        </div>
+
+      </div>
+    </van-tab>
+    <van-tab title="待付款">
+      <div class="div">
+        <div class="div1">
+          <div class="order-title-restaurantName">
+            快递公司
+          </div>
+          <div class="order-title-state">
+            付款状态
+          </div>
+        </div>
+
+        <div class="div2">
+          <img src="/static/images/user.png">
+          <div class="order-content-info">
+            <div class="order-content-info-price">
+              金额
+            </div>
+            <div class="order-content-info-date">
+              日期 时间
+            </div>
+            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
+          </div>
+        </div>
+
+        <div class="div3">
+          <div class="order-footer-orderAgain">删除</div>
+          <div class="order-footer-goToComment">去评论</div>
+        </div>
+
+      </div>
+
+
+      <div class="div">
+        <div class="div1">
+          <div class="order-title-restaurantName">
+            快递公司
+          </div>
+          <div class="order-title-state">
+            付款状态
+          </div>
+        </div>
+
+        <div class="div2">
+          <img src="/static/images/user.png">
+          <div class="order-content-info">
+            <div class="order-content-info-price">
+              金额
+            </div>
+            <div class="order-content-info-date">
+              日期 时间
+            </div>
+            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
+          </div>
+        </div>
+
+        <div class="div3">
+          <div class="order-footer-orderAgain">删除</div>
+          <div class="order-footer-goToComment">去评论</div>
+        </div>
+
+      </div>
+    </van-tab>
+    <van-tab title="待评价">
+      <div class="div">
+        <div class="div1">
+          <div class="order-title-restaurantName">
+            快递公司
+          </div>
+          <div class="order-title-state">
+            付款状态
+          </div>
+        </div>
+
+        <div class="div2">
+          <img src="/static/images/user.png">
+          <div class="order-content-info">
+            <div class="order-content-info-price">
+              金额
+            </div>
+            <div class="order-content-info-date">
+              日期 时间
+            </div>
+            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
+          </div>
+        </div>
+
+        <div class="div3">
+          <div class="order-footer-orderAgain">删除</div>
+          <div class="order-footer-goToComment">去评论</div>
+        </div>
+
+      </div>
+
+
+      <div class="div">
+        <div class="div1">
+          <div class="order-title-restaurantName">
+            快递公司
+          </div>
+          <div class="order-title-state">
+            付款状态
+          </div>
+        </div>
+
+        <div class="div2">
+          <img src="/static/images/user.png">
+          <div class="order-content-info">
+            <div class="order-content-info-price">
+              金额
+            </div>
+            <div class="order-content-info-date">
+              日期 时间
+            </div>
+            <div class="order-content-info-howToDistribute">由云跑提供服务</div>
+          </div>
+        </div>
+
+        <div class="div3">
+          <div class="order-footer-orderAgain">删除</div>
+          <div class="order-footer-goToComment">去评论</div>
+        </div>
+
+      </div>
+    </van-tab>
+
+  </van-tabs>
+</template>
+
+<script>
+  export default {
+    data(){
+      return {
+        active:1
+      };
+    },
+    methods:{
+      onChange(event){
+        console.log(event)
+        wx.showToast({
+          title:'切换到标签${event.detail.index+1}',
+          icon:'none'
+        })
+      }
+    }
+  };
+</script>
+
+<style>
+  .div{
+    /*width: 100%;*/
+    /*padding: 15rpx;*/
+    /*border: 100rpx 0;*/
+    border-style: solid;
+    border-color: #ECECEC;
+  }
+  .div1{
+    width: 100%;
+    height: 70rpx;
+    line-height: 70rpx;
+    border-bottom: 1rpx solid #ECECEC;
+    display: flex;
+    justify-content: space-between;
+  }
+  .div2{
+    height: 250rpx;
+    display: flex;
+    align-items: center;
+    border-bottom: 1rpx solid #ECECEC;
+  }
+  .div2 img{
+    width: 200rpx;
+    height: 200rpx;
+  }
+  .div3{
+    width: 100%;
+    height: 90rpx;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 28rpx;
+    border-bottom: 1rpx solid #ECECEC;
+  }
+  .order-content-info-price{
+    color: red;
+    font-size: 30rpx;
+  }
+  .order-content-info-price,.order-content-info-date,
+  .order-content-info-howToDistribute{
+    height: 42rpx;
+    line-height: 42rpx;
+    margin-left: 30rpx;
+  }
+  .order-content-info{
+    font-size: 25rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .order-footer-goToComment,.order-footer-orderAgain{
+    margin-top: 15rpx;
+    margin-right: 40rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    width: 200rpx;
+    text-align: center;
+    border: 1rpx solid #ECECEC;
+  }
+  .order-footer-orderAgain{
+    margin-right: 20rpx;
+  }
+  .order-footer-goToComment{
+    background: #339900;
+  }
+  .order-title-restaurantName{
+    padding-left: 20rpx;
+  }
+  .order-title-state{
+    padding-right: 20rpx;
+  }
+
+</style>
