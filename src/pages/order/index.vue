@@ -13,66 +13,7 @@
           <van-button size="mini" style="color: #07c160">去付款</van-button>
         </view>
       </van-card>
-      <!--<div class="div">-->
-        <!--<div class="div1">-->
-          <!--<div class="order-title-restaurantName">-->
-            <!--快递公司-->
-          <!--</div>-->
-          <!--<div class="order-title-state">-->
-            <!--付款状态-->
-          <!--</div>-->
-        <!--</div>-->
 
-        <!--<div class="div2">-->
-          <!--<img src="/static/images/user.png">-->
-          <!--<div class="order-content-info">-->
-            <!--<div class="order-content-info-price">-->
-              <!--金额-->
-            <!--</div>-->
-            <!--<div class="order-content-info-date">-->
-              <!--日期 时间-->
-            <!--</div>-->
-            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="div3">-->
-          <!--<div class="order-footer-orderAgain">删除</div>-->
-          <!--<div class="order-footer-goToComment">去评论</div>-->
-        <!--</div>-->
-
-      <!--</div>-->
-
-
-      <!--<div class="div">-->
-        <!--<div class="div1">-->
-          <!--<div class="order-title-restaurantName">-->
-            <!--快递公司-->
-          <!--</div>-->
-          <!--<div class="order-title-state">-->
-            <!--付款状态-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="div2">-->
-          <!--<img src="/static/images/user.png">-->
-          <!--<div class="order-content-info">-->
-            <!--<div class="order-content-info-price">-->
-              <!--金额-->
-            <!--</div>-->
-            <!--<div class="order-content-info-date">-->
-              <!--日期 时间-->
-            <!--</div>-->
-            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="div3">-->
-          <!--<div class="order-footer-orderAgain">删除</div>-->
-          <!--<div class="order-footer-goToComment">去评论</div>-->
-        <!--</div>-->
-
-      <!--</div>-->
 
     </van-tab>
 
@@ -107,66 +48,7 @@
           <van-button size="mini" style="color: #07c160">去评价</van-button>
         </view>
       </van-card>
-      <!--<div class="div">-->
-        <!--<div class="div1">-->
-          <!--<div class="order-title-restaurantName">-->
-            <!--快递公司-->
-          <!--</div>-->
-          <!--<div class="order-title-state">-->
-            <!--付款状态-->
-          <!--</div>-->
-        <!--</div>-->
 
-        <!--<div class="div2">-->
-          <!--<img src="/static/images/user.png">-->
-          <!--<div class="order-content-info">-->
-            <!--<div class="order-content-info-price">-->
-              <!--金额-->
-            <!--</div>-->
-            <!--<div class="order-content-info-date">-->
-              <!--日期 时间-->
-            <!--</div>-->
-            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="div3">-->
-          <!--<div class="order-footer-orderAgain">删除</div>-->
-          <!--<div class="order-footer-goToComment">去评论</div>-->
-        <!--</div>-->
-
-      <!--</div>-->
-
-
-      <!--<div class="div">-->
-        <!--<div class="div1">-->
-          <!--<div class="order-title-restaurantName">-->
-            <!--快递公司-->
-          <!--</div>-->
-          <!--<div class="order-title-state">-->
-            <!--付款状态-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="div2">-->
-          <!--<img src="/static/images/user.png">-->
-          <!--<div class="order-content-info">-->
-            <!--<div class="order-content-info-price">-->
-              <!--金额-->
-            <!--</div>-->
-            <!--<div class="order-content-info-date">-->
-              <!--日期 时间-->
-            <!--</div>-->
-            <!--<div class="order-content-info-howToDistribute">由云跑提供服务</div>-->
-          <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="div3">-->
-          <!--<div class="order-footer-orderAgain">删除</div>-->
-          <!--<div class="order-footer-goToComment">去评论</div>-->
-        <!--</div>-->
-
-      <!--</div>-->
     </van-tab>
 
   </van-tabs>

@@ -37,7 +37,7 @@
           :border="false"
           input-align="right"
         />
-        <van-button class="confirm-order" type="info" size="large">下单</van-button>
+        <van-button class="confirm-order" type="info" size="large">￥ 1.0提交订单</van-button>
       </van-cell-group>
     </div>
   </div>
