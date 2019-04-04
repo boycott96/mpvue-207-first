@@ -5,6 +5,7 @@
     "pages/order/main",
     "pages/counter/main",
     "pages/mine/main",
+    "pages/submit/main",
     "pages/item/main"
   ],
   "window": {
