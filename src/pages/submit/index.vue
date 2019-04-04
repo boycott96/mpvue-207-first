@@ -24,9 +24,11 @@
 </script>
 
 <style>
-  .panel-class {
+  page {
     background: #edece8;
-    height: 100%;
+  }
+
+  .panel-class {
     padding: 10px;
   }
 
@@ -36,7 +38,6 @@
 
   .two-panel-class {
     margin-top: 10px;
-    height: 1000px;
   }
 
   .address-class .van-cell {
