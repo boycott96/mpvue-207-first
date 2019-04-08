@@ -1,17 +1,11 @@
 <template>
   <div class="div">
     <div class="img-photo-class">
-      <el-row>
-        <el-col span="4" class="img-class">
-          <img class="photo-class" src="/static/images/user.png" alt="">
-        </el-col>
-        <el-col span="20" class="name-class">
-          <el-col>张三</el-col>
-          <el-col>ID:123456</el-col>
-        </el-col>
-      </el-row>
+      <div class="img-class">
+        <img src='/static/images/user.png' alt="" class="photo-class">
+      </div>
     </div>
-    <!--<div class="div2">
+    <div class="div2">
       <div class="div3">
         <text>云跑红包</text>
       </div>
@@ -24,7 +18,7 @@
       <div class="div6">
         <text>退出账号</text>
       </div>
-    </div>-->
+    </div>
   </div>
 </template>
 
@@ -33,7 +27,7 @@
   export default {
     name: "index",
     data: () => {
-      return {}
+      return {};
     },
     methods: {},
     created() {
@@ -45,23 +39,21 @@
 <style>
   .img-photo-class {
     background: #ECECEC;
-    height: 150px;
+    height: 120px;
+    padding: 40px;
   }
 
   .photo-class {
     height: 100px;
     width: 100px;
+    border-radius: 50%;
   }
 
   .img-class {
     height: 100px;
-  }
-
-  .name-class {
-    height: 100px;
+    text-align: center;
   }
 
   .div {
-    background: #ECECEC;
   }
 </style>
