@@ -1,51 +1,55 @@
 <template>
-  <van-cell-group>
-    <van-field placeholder="请输入快件手机尾号" label="手机尾号" left-icon="phone" :border="false" :value="form.phone"></van-field>
+  <div class="panel-class">
+    <div class="one-panel-class">
+        <van-cell-group>
+          <van-field placeholder="请输入快件手机尾号" label="手机尾号" left-icon="phone" :border="false" :value="form.phone"></van-field>
 
-    <van-field value="" label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly
-               @click="activeSelect"></van-field>
-
-
-    <van-field label="收件日期" left-icon="calender-o" :border="false" :value="form.currentDate" readonly
-               @click="activeDate"></van-field>
+          <van-field value="" label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly
+                     @click="activeSelect"></van-field>
 
 
-    <van-field label="件数" left-icon="chart-trending-o" :border="false" :value="form.count" readonly
-               @click="activeCount"></van-field>
+          <van-field label="收件日期" left-icon="calender-o" :border="false" :value="form.currentDate" readonly
+                     @click="activeDate"></van-field>
 
-    <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight" readonly
-               @click="activeWeight"></van-field>
 
-    <van-field label="收件类型" left-icon="bag-o" :border="false" :value="form.type" readonly
-               @click="activeType"></van-field>
+          <van-field label="件数" left-icon="chart-trending-o" :border="false" :value="form.count" readonly
+                     @click="activeCount"></van-field>
 
-    <van-button class="confirm-order" type="info" size="large" @click="onsubmit">下单</van-button>
+          <van-field label="收件重量" left-icon="bag-o" :border="false" :value="form.weight" readonly
+                     @click="activeWeight"></van-field>
 
-    <!--快递公司下拉框-->
-    <van-popup :show="show" position="bottom">
-      <van-picker show-toolbar :columns="columns" @confirm="onConfirm" @cancel="show = false"></van-picker>
-    </van-popup>
-    <!--收件类型 下拉框 -->
-    <van-popup :show="typeshow" position="bottom">
-      <van-picker show-toolbar :columns="type" @confirm="onType" @cancel="typeshow = false"></van-picker>
-    </van-popup>
+          <van-field label="收件类型" left-icon="bag-o" :border="false" :value="form.type" readonly
+                     @click="activeType"></van-field>
 
-    <!--收件日期下拉框-快捷选择-->
-    <van-popup :show="dateshow" position="bottom">
-      <van-datetime-picker :value="currentDate" type="date" :max-date="maxDate" :min-date="minDate"
-                           @confirm="onConfirmDate"
-                           @cancel="dateshow = false"></van-datetime-picker>
-    </van-popup>
-    <!--件数下拉框-快捷选择-->
-    <van-popup :show="countshow" position="bottom">
-      <van-picker show-toolbar :columns="count" @confirm="onCount" @cancel="countshow = false"></van-picker>
-    </van-popup>
-    <!--收件重量-快捷选择-->
-    <van-popup :show="weightshow" position="bottom">
-      <van-picker show-toolbar :columns="weight" @confirm="onWeight" @cancel="weightshow = false"></van-picker>
-    </van-popup>
+          <van-button class="confirm-order" type="info" size="large" @click="onsubmit">下单</van-button>
+
+          <!--快递公司下拉框-->
+          <van-popup :show="show" position="bottom">
+            <van-picker show-toolbar :columns="columns" @confirm="onConfirm" @cancel="show = false"></van-picker>
+          </van-popup>
+          <!--收件类型 下拉框 -->
+          <van-popup :show="typeshow" position="bottom">
+            <van-picker show-toolbar :columns="type" @confirm="onType" @cancel="typeshow = false"></van-picker>
+          </van-popup>
+
+          <!--收件日期下拉框-快捷选择-->
+          <van-popup :show="dateshow" position="bottom">
+            <van-datetime-picker :value="currentDate" type="date" :max-date="maxDate" :min-date="minDate"
+                                 @confirm="onConfirmDate"
+                                 @cancel="dateshow = false"></van-datetime-picker>
+          </van-popup>
+          <!--件数下拉框-快捷选择-->
+          <van-popup :show="countshow" position="bottom">
+            <van-picker show-toolbar :columns="count" @confirm="onCount" @cancel="countshow = false"></van-picker>
+          </van-popup>
+          <!--收件重量-快捷选择-->
+          <van-popup :show="weightshow" position="bottom">
+            <van-picker show-toolbar :columns="weight" @confirm="onWeight" @cancel="weightshow = false"></van-picker>
+          </van-popup>
 
   </van-cell-group>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -157,6 +161,15 @@
   };
 </script>
 
-<style>
+<style scoped>
 
+  /*page {*/
+    /*background: #edece8;*/
+  /*}*/
+  .panel-class{
+    padding: 10px;
+  }
+  .one-panel-class{
+    margin-top: 10px;
+  }
 </style>

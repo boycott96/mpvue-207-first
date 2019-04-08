@@ -1,31 +1,21 @@
 <template>
   <van-tabs :active="active"@click="onChange">
-    <van-tab title="全部订单">
-      <van-card
-        num="3"
-        price="2.00"
-        desc="描述信息"
-        title="韵达快递"
-        :thumb="imageURL"
-      >
-        <view slot="footer">
-          <van-button size="mini">删除</van-button>
-          <van-button size="mini" style="color: #07c160">去付款</van-button>
-        </view>
-      </van-card>
 
+    <van-tab title="全部订单">
+      <div class="panel-class">
+        <van-card num="3" price="2.00" desc="描述信息" title="韵达快递" :thumb="imageURL">
+          <view slot="footer">
+            <van-button size="mini">删除</van-button>
+            <van-button size="mini" style="color: #07c160">去付款</van-button>
+          </view>
+     ` `</van-card>
+      </div>
 
     </van-tab>
 
 
     <van-tab title="待付款">
-      <van-card
-        num="3"
-        price="2.00"
-        desc="描述信息"
-        title="韵达快递"
-        :thumb="imageURL"
-      >
+      <van-card num="3" price="2.00" desc="描述信息" title="韵达快递" :thumb="imageURL">
       <view slot="footer">
         <van-button size="mini">删除</van-button>
         <van-button size="mini" style="color: #07c160">去付款</van-button>
@@ -35,14 +25,7 @@
 
 
     <van-tab title="待评价">
-      <van-card
-        num="3"
-        price="2.00"
-        desc="描述信息"
-        title="韵达快递"
-
-        :thumb="imageURL"
-      >
+      <van-card num="3" price="2.00" desc="描述信息" title="韵达快递" :thumb="imageURL">
         <view slot="footer">
           <van-button size="mini">删除</van-button>
           <van-button size="mini" style="color: #07c160">去评价</van-button>
@@ -144,6 +127,10 @@
   }
   .order-title-state{
     padding-right: 20rpx;
+  }
+  .panel-class{
+    margin-bottom: 10px;
+    border-bottom: 1rpx solid #ECECEC;
   }
 
 </style>
