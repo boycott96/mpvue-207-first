@@ -16,6 +16,9 @@
 </template>
 
 <script>
+
+  const appid='wxd546444ad8aaaf05'
+  const secret='e2f6eaecb76a6a8604d447b8ebfe5128'
   export default {
    data(){
      return{
@@ -38,10 +41,15 @@
       handleGetUserInfo(){
         wx.getUserInfo({
           success:(data)=>{
-            console.log(data)
+           // console.log(data)
             //更新data中的数据
             this.userInfo=data.userInfo
             this.isShow=true
+            wx.login({
+              success(res) {
+                console.log(res)
+              }
+            })
           },
           fail:()=>{
             console.log('获取失败')
@@ -49,11 +57,13 @@
         })
       },
      getUserInfo(data){
-       console.log(data)
+       //console.log(data)
        //判断用户是否授权
        if(data.mp.detail.rawData){
          //用户授权
          this.handleGetUserInfo()
+         console.log('fffwww')
+
        }
      }
     }

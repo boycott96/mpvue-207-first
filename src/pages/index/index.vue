@@ -2,11 +2,11 @@
   <div class="panel-class">
     <div class="one-panel-class">
         <van-cell-group>
-          <van-field placeholder="请输入快件手机尾号" label="手机尾号" left-icon="phone" :border="false" :value="form.phone"></van-field>
+          <van-field placeholder="请输入快件手机尾号" v-model="form.phone" label="手机尾号" left-icon="phone" :border="false"
+                     :value="form.phone"></van-field>
 
-          <van-field value="" label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly
+          <van-field label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly
                      @click="activeSelect"></van-field>
-
 
           <van-field label="收件日期" left-icon="calender-o" :border="false" :value="form.currentDate" readonly
                      @click="activeDate"></van-field>
@@ -84,6 +84,7 @@
         weight: ["(0,5kg]", "(5,10kg]"],
         count: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         type: ['服饰鞋子', '洗发液类', '化妆品', '生活用品', '电子产品', '其它']
+
       };
     },
 
@@ -149,6 +150,8 @@
 
       //下单
       onsubmit() {
+        console.log(this.form.phone)
+        console.log(this.form);
         wx.navigateTo({
           url: '/pages/submit/main'
         })

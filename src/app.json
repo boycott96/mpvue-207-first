@@ -1,14 +1,15 @@
 {
   "pages": [
-    "pages/payinfo/main",
+
+
     "pages/index/main",
     "pages/order/main",
     "pages/counter/main",
     "pages/mine/main",
     "pages/submit/main",
     "pages/item/main",
-    "pages/shouquan/main"
-
+    "pages/shouquan/main",
+    "pages/payinfo/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

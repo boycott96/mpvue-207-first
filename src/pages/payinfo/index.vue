@@ -3,10 +3,6 @@
   <div class="panel-class">
 
     <div class="one-panel-class">
-  <!--    <van-cell icon="logistics" size="large">
-        <view>请在15分钟之内完成支付，超时将自动取消</view>
-      </van-cell>-->
-
       <van-field placeholder="请在15分钟之内完成支付，超时将自动取消" left-icon="logistics" disabled :border="false"/>
     </div>
 
