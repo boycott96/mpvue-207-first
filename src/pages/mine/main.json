@@ -5,6 +5,11 @@
     "van-col": "/static/vant/col/index",
     "van-cell": "/static/vant/cell/index",
     "van-cell-group": "/static/vant/cell-group/index",
-    "van-panel": "/static/vant/panel/index"
+    "van-panel": "/static/vant/panel/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-button": "/static/vant/button/index",
+    "van-icon": "/static/vant/icon/index",
+    "van-radio-group": "/static/vant/radio-group/index",
+    "van-radio": "/static/vant/radio/index"
   }
 }
