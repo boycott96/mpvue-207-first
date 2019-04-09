@@ -11,6 +11,7 @@
     "van-icon": "/static/vant/icon/index",
     "van-radio-group": "/static/vant/radio-group/index",
     "van-radio": "/static/vant/radio/index",
-    "van-field": "/static/vant/field/index"
+    "van-field": "/static/vant/field/index",
+    "van-area": "/static/vant/area/index"
   }
 }

@@ -7,9 +7,9 @@
                 @click="selectTime"></van-cell>
     </div>
     <div class="two-panel-class">
-      <van-cell class="company-class" title="韵达快递" label="小计:共1件" icon="wap-home" size="large"></van-cell>
+      <van-cell class="company-class" :title="title" label="小计:共+'title'+件" icon="wap-home" size="large"></van-cell>
       <van-cell class="company-class" title="收件人姓名" value="小王" size="large"></van-cell>
-      <van-cell class="company-class" title="手机尾号" value="6835" size="large"></van-cell>
+      <van-cell class="company-class" title="手机尾号" :value="item.phone" size="large"></van-cell>
     </div>
     <van-submit-bar :price="3050" button-text="提交订单" @click="submitOrder"></van-submit-bar>
     <!--弹出层-->
@@ -41,9 +41,29 @@
         timeShow: false,
         //时间数据保存
         timeData: new Date().getTime(),
+        time: new Date().toLocaleString(),
+        //封装该页数据
+        item:{
+          phone: "",
+          company: "",
+          currentDate: "",
+          count: "",
+          weight: "",
+          type: ""
+        },
+        title:"",
 
-        time: new Date().toLocaleString()
       };
+    },
+    onLoad(options){
+      console.log('跳转成功')
+      console.log(options.phone)
+      this.item.phone=options.phone;
+      this.title=options.company;
+    },
+    beforeMount(){
+      console.log('---beforeMount----')
+
     },
     methods: {
       //激活选择时间
@@ -63,6 +83,7 @@
       onConfirm(event) {
         this.address = event.mp.detail.value;
         this.addressShow = false;
+
       },
 
       //选中时间事件

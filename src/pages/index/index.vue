@@ -104,6 +104,8 @@
         let subIndex = time.indexOf(" ");
         this.form.currentDate = time.substr(0, subIndex);
         this.dateshow = false;
+        //var data=new Date().toLocaleString().substr(0, new Date().toLocaleString().indexOf(" ")).toString();
+       // this.currentDate=data;
       },
       //激活日期选择
       activeDate() {
@@ -158,7 +160,9 @@
         console.log(this.form.phone);
         console.log(this.form);
         wx.navigateTo({
-          url: "/pages/submit/main"
+          url: "/pages/submit/main?phone="+this.form.phone+"&company="+this.form.company
+          +"&count="+this.form.count+"&type="+this.form.type+"&weight="+this.form.weight
+            +"&currentData="+this.form.currentDate,
         });
       }
 
@@ -175,10 +179,13 @@
   /*background: #edece8;*/
   /*}*/
   .panel-class {
-    padding: 10px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
   }
 
   .one-panel-class {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
   }
 </style>

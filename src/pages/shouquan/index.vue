@@ -62,8 +62,9 @@
        if(data.mp.detail.rawData){
          //用户授权
          this.handleGetUserInfo()
-         console.log('fffwww')
-
+         wx.switchTab({
+           url:'/pages/index/main'
+         })
        }
      }
     }
