@@ -29,18 +29,20 @@
           </div>
           <div class="edit-address-class">
             <van-cell-group class="address-cell-group-class">
-              <van-field :value="name" required clearable label="姓名" left-icon="user-o" placeholder="收货人姓名"
-                         @click-icon="onClickIcon"></van-field>
-              <van-field :value="phone" type="password" label="电话" placeholder="收货人手机号" left-icon="phone-circle-o"
+              <van-field :value="addressForm.name" clearable label="姓名" left-icon="user-o"
+                         placeholder="收货人姓名"></van-field>
+              <van-field :value="addressForm.phone" type="text" label="电话" placeholder="收货人手机号"
+                         left-icon="phone-circle-o"
                          :border="false"></van-field>
-              <van-field :value="city" type="password" label="地区" placeholder="选择省/市/区" left-icon="home-o"
+              <van-field :value="addressForm.city" type="text" label="地区" placeholder="选择省/市/区" left-icon="home-o"
                          :border="false"></van-field>
-              <van-field :value="address" type="password" label="详细地址" placeholder="街道门牌号、楼层房间号等信息" left-icon="aim"
+              <van-field :value="addressForm.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等信息"
+                         left-icon="aim"
                          :border="false"></van-field>
             </van-cell-group>
             <div>
-              <van-button type="danger" size="large" class="inner-button-class">保存</van-button>
-              <van-button size="large" class="inner-button-class">删除</van-button>
+              <van-button type="danger" size="large" class="inner-button-class" @click="submit">保存</van-button>
+              <van-button size="large" class="inner-button-class" @click="deleteAddress">删除</van-button>
             </div>
           </div>
         </van-popup>
@@ -68,17 +70,37 @@
           phone: '13855036835',
           city: '浙江省杭州市西湖区',
           address: '文三路138号东方通信大厦7楼501室',
-        }]
+        }],
+
+        addressForm: {
+          name: '',
+          phone: '',
+          city: '',
+          address: ''
+        }
       };
     },
     methods: {
+      //激活地址
       selectAddress() {
         this.addressShow = true;
       },
 
+      //激活编辑地址
       editAddress(value) {
-        console.log(value);
-        this.editAddressShow = true;
+        let self = this;
+        self.editAddressShow = true;
+        self.addressForm = value;
+      },
+
+      //提交表单
+      submit() {
+        this.editAddressShow = false;
+      },
+
+      //删除地址
+      deleteAddress() {
+        this.editAddressShow = false;
       }
     },
     created() {
