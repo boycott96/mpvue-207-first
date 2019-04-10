@@ -159,10 +159,12 @@
       onsubmit() {
         console.log(this.form.phone);
         console.log(this.form);
+        var money=this.form.count*1.0;
+        console.log(money);
         wx.navigateTo({
           url: "/pages/submit/main?phone="+this.form.phone+"&company="+this.form.company
           +"&count="+this.form.count+"&type="+this.form.type+"&weight="+this.form.weight
-            +"&currentData="+this.form.currentDate,
+            +"&currentData="+this.form.currentDate+"&money="+money,
         });
       }
 

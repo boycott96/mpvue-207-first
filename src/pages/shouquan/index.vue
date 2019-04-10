@@ -17,21 +17,38 @@
 
 <script>
 
-  const appid='wxd546444ad8aaaf05'
-  const secret='e2f6eaecb76a6a8604d447b8ebfe5128'
+
   export default {
    data(){
      return{
         userInfo:{},
-       isShow:false
+       isShow:false,
+       status:""
      }
    },
+    created(){
+      console.log('-----created-----')
+      wx.getStorage({
+        key:'can_getuserinfo',
+        success(res) {
+          console.log('kkkk')
+          if(res.data){
+            wx.switchTab({
+              url:'/pages/index/main'
+            })
+          }
+        }
+      })
+    },
     onLoad(){
      console.log('---onLoad----')
     },
     beforeMount(){
       console.log('---beforeMount----')
+
       this.handleGetUserInfo()
+
+
     },
     mounted(){
       console.log('---mounted----')
@@ -62,8 +79,33 @@
        if(data.mp.detail.rawData){
          //用户授权
          this.handleGetUserInfo()
+
+
          wx.switchTab({
            url:'/pages/index/main'
+         })
+
+         console.log('行不行')
+
+         wx.getSetting({
+           success(res) {
+             console.log(res)
+             if(res.authSetting['scope.userInfo']){
+               //授权成功
+               wx.setStorage({
+                 key:'can_getuserinfo',
+                 data:1,
+               })
+             }else{
+               wx.setStorage({
+                 key:'can_getuserinfo',
+                 data:0,
+               })
+             }
+           },
+           fail(res) {
+             console.log(res)
+           }
          })
        }
      }

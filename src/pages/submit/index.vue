@@ -6,12 +6,16 @@
       <van-cell class="company-class" title="选择配送时间" :label="time" icon="underway-o" size="large" is-link
                 @click="selectTime"></van-cell>
     </div>
+
     <div class="two-panel-class">
-      <van-cell class="company-class" :title="title" label="小计:共+'title'+件" icon="wap-home" size="large"></van-cell>
+      <van-cell class="company-class" :title="title" label="小计:共件" icon="wap-home" size="large">
+
+      </van-cell>
       <van-cell class="company-class" title="收件人姓名" value="小王" size="large"></van-cell>
       <van-cell class="company-class" title="手机尾号" :value="item.phone" size="large"></van-cell>
     </div>
-    <van-submit-bar :price="3050" button-text="提交订单" @click="submitOrder"></van-submit-bar>
+
+    <van-submit-bar :price="item.money" button-text="提交订单" @click="submitOrder"></van-submit-bar>
     <!--弹出层-->
     <van-popup :show="addressShow" position="bottom">
       <van-row class="title-class">
@@ -49,7 +53,11 @@
           currentDate: "",
           count: "",
           weight: "",
-          type: ""
+          type: "",
+          univercity:"",
+          detail_address:"",
+          time:"",
+          money:1111
         },
         title:"",
 
@@ -58,12 +66,15 @@
     onLoad(options){
       console.log('跳转成功')
       console.log(options.phone)
+      console.log(options)
       this.item.phone=options.phone;
       this.title=options.company;
+      this.item.money=options.money;
+      console.log(this.item.money)
+
     },
     beforeMount(){
       console.log('---beforeMount----')
-
     },
     methods: {
       //激活选择时间
@@ -77,6 +88,7 @@
 
       //提交订单
       submitOrder() {
+
       },
 
       //选中地址事件
