@@ -8,14 +8,17 @@
     </div>
 
     <div class="two-panel-class">
-      <van-cell class="company-class" :title="title" label="小计:共件" icon="wap-home" size="large">
+      <van-cell class="company-class" :title="title" :label="label+count+label1" icon="wap-home" size="large">
 
       </van-cell>
+
+      <!--<van-cell :title="title" :value="+" size="large" label="描述信息"/>-->
+
       <van-cell class="company-class" title="收件人姓名" value="小王" size="large"></van-cell>
-      <van-cell class="company-class" title="手机尾号" :value="item.phone" size="large"></van-cell>
+      <van-cell class="company-class" title="手机尾号" :value="submit.phone" size="large"></van-cell>
     </div>
 
-    <van-submit-bar :price="item.money" button-text="提交订单" @click="submitOrder"></van-submit-bar>
+    <van-submit-bar :price="money" button-text="提交订单" @click="submitOrder"></van-submit-bar>
     <!--弹出层-->
     <van-popup :show="addressShow" position="bottom">
       <van-row class="title-class">
@@ -47,30 +50,53 @@
         timeData: new Date().getTime(),
         time: new Date().toLocaleString(),
         //封装该页数据
-        item:{
-          phone: "",
-          company: "",
-          currentDate: "",
-          count: "",
-          weight: "",
-          type: "",
-          univercity:"",
-          detail_address:"",
-          time:"",
-          money:1111
-        },
+        // item:{
+        //   phone: "",
+        //   company: "",
+        //   currentDate: "",
+        //   count: "",
+        //   weight: "",
+        //   type: "",
+        //   univercity:"",
+        //   detail_address:"",
+        //   time:"",
+        //
+        // },
         title:"",
+        money:1,
+        label:"小计:共",
+        label1:"件",
+        count:"",
+        //封装提交数据
+        submit:{
+          count:"",
+          company:"",
+          data:"",
+          weight:"",
+          type:"",
+          address:"",
+          phone:"",
+          openid:""
+        }
 
       };
     },
     onLoad(options){
       console.log('跳转成功')
-      console.log(options.phone)
+      // console.log(options.phone)
       console.log(options)
-      this.item.phone=options.phone;
+      this.submit.phone=options.phone;
+      this.submit.count=options.count;
+      this.submit.company=options.company;
+      this.submit.data=options.currentData;
+      this.submit.type=options.type;
+      this.submit.weight=options.weight;
+
+
       this.title=options.company;
-      this.item.money=options.money;
-      console.log(this.item.money)
+      this.money=options.money*100;
+      this.count=options.count;
+
 
     },
     beforeMount(){
@@ -88,6 +114,9 @@
 
       //提交订单
       submitOrder() {
+          console.log(this.submit)
+
+
 
       },
 

@@ -157,15 +157,30 @@
 
       //下单
       onsubmit() {
-        console.log(this.form.phone);
-        console.log(this.form);
-        var money=this.form.count*1.0;
-        console.log(money);
-        wx.navigateTo({
-          url: "/pages/submit/main?phone="+this.form.phone+"&company="+this.form.company
-          +"&count="+this.form.count+"&type="+this.form.type+"&weight="+this.form.weight
-            +"&currentData="+this.form.currentDate+"&money="+money,
-        });
+        if(this.form.phone==""){
+          wx.showToast({
+            title: '请输入手机尾号',
+            icon: 'none',
+            duration: 2000
+          })
+        }else {
+          // console.log(this.form.phone);
+          //console.log(this.form);
+          var money;
+          var str = this.form.weight;
+          if (str == "(0kg,5kg]") {
+            money = this.form.count * 1.0;
+          } else {
+            money = this.form.count * 3.0;
+          }
+
+          console.log(money);
+          wx.navigateTo({
+            url: "/pages/submit/main?phone=" + this.form.phone + "&company=" + this.form.company
+              + "&count=" + this.form.count + "&type=" + this.form.type + "&weight=" + this.form.weight
+              + "&currentData=" + this.form.currentDate + "&money=" + money,
+          });
+        }
       }
 
     },
