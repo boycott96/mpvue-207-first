@@ -1,6 +1,15 @@
+
+
 <script>
+  // import {Base} from 'utils/base.js'
+
 export default {
+
+
+
   created () {
+    /*let base=new Base();
+    base.test();*/
     wx.getStorage({
       key:'can_getuserinfo',
       success(res) {
@@ -11,7 +20,12 @@ export default {
           })
         }
       }
+
+
     })
+
+    /*let base=new Base();
+    base.test();*/
     // 调用API从本地缓存中获取数据
     /*
      * 平台 api 差异的处理方式:  api 方法统一挂载到 mpvue 名称空间, 平台判断通过 mpvuePlatform 特征字符串
@@ -40,6 +54,9 @@ export default {
   },
   log () {
     console.log(`log at:${Date.now()}`)
+  },
+  methods:{
+
   }
 }
 </script>

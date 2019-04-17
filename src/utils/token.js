@@ -1,7 +1,7 @@
-import {Config} from 'config.js'
+import {Config} from './config.js'
 
 
-class Token {
+export default class Token {
   constructor(){
     this.verifyUrl=Config.restUrl+'token/verify';
     this.tokenUrl=Config.restUrl+'token/user';
@@ -51,4 +51,4 @@ class Token {
   }
 }
 
-export {Token};
+

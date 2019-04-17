@@ -3,7 +3,7 @@
 
     <van-tab title="全部订单">
       <div class="panel-class">
-        <van-card num="3" price="2.00" desc="描述信息" title="韵达快递" :thumb="imageURL">
+        <van-card num="3" price="2.00" desc="2019-3-29 15-30-30" title="韵达快递" :thumb="imageURL">
           <view slot="footer">
             <van-button size="mini">删除</van-button>
             <van-button size="mini" style="color: #07c160">去付款</van-button>
@@ -15,7 +15,7 @@
 
 
     <van-tab title="待付款">
-      <van-card num="3" price="2.00" desc="描述信息" title="韵达快递" :thumb="imageURL">
+      <van-card num="3" price="2.00" desc="2019-3-29 15-30-30" title="韵达快递" :thumb="imageURL">
       <view slot="footer">
         <van-button size="mini">删除</van-button>
         <van-button size="mini" style="color: #07c160">去付款</van-button>
@@ -25,7 +25,7 @@
 
 
     <van-tab title="待评价">
-      <van-card num="3" price="2.00" desc="描述信息" title="韵达快递" :thumb="imageURL">
+      <van-card num="3" price="2.00" desc="2019-3-29 15-30-30" title="韵达快递" :thumb="imageURL">
         <view slot="footer">
           <van-button size="mini">删除</van-button>
           <van-button size="mini" style="color: #07c160">去评价</van-button>
@@ -53,6 +53,7 @@
           icon:'none'
         })
       }
+
     }
   };
 </script>

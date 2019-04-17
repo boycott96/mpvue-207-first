@@ -1,14 +1,15 @@
 {
   "pages": [
-    "pages/shouquan/main",
+    "pages/payinfo/main",
     "pages/index/main",
     "pages/order/main",
     "pages/counter/main",
     "pages/mine/main",
     "pages/submit/main",
     "pages/item/main",
-    "pages/payinfo/main"
-    
+    "pages/shouquan/main"
+
+
 
 
   ],

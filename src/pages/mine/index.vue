@@ -30,6 +30,8 @@
                       @click="editAddress(item)"></van-icon>
           </van-cell>
         </van-cell-group>
+
+
         <van-popup :show="editAddressShow" position="right" class="right-popup-inner">
           <div class="back-div-class">
             <van-icon name="arrow-left" @click="editAddressShow = false" class="back-icon"></van-icon>
@@ -56,15 +58,17 @@
                 <van-area :area-list="AreaList" value="110101" @cancel="show = false" @confirm="onArea"></van-area>
               </van-popup>
             </van-cell-group>
+
+
+
             <div>
               <van-button type="danger" size="large" class="inner-button-class" @click="submit">保存</van-button>
-              <van-button size="large" class="inner-button-class" @click="deleteAddress">删除</van-button>
+              <van-button size="large"  class="inner-button-class" @click="deleteAddress">删除</van-button>
             </div>
           </div>
         </van-popup>
       </div>
     </van-popup>
-
   </div>
 </template>
 

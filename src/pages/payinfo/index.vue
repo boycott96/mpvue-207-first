@@ -3,10 +3,11 @@
   <div class="panel-class">
 
     <div class="one-panel-class">
-      <van-field placeholder="请在15分钟之内完成支付，超时将自动取消" left-icon="logistics" disabled :border="false"/>
+      <!--<van-field placeholder="请在15分钟之内完成支付，超时将自动取消" left-icon="logistics" disabled :border="false"/>-->
+      <van-field placeholder="支付超时，订单已取消" left-icon="logistics" disabled :border="false"/>
     </div>
 
-    <div class="two-panel-class">
+<!--    <div class="two-panel-class">
       <van-cell>
         <view slot="title">
           <view class="van-cell-text">预计01：30送达</view>
@@ -18,13 +19,13 @@
        </van-cell>
 
       <van-cell   lable="van-row" :border="false">
-        <van-row>
+     &lt;!&ndash;   <van-row>
           <van-col span="8"><van-button type="default">取消支付</van-button></van-col>
           <van-col span="8"><van-button type="primary">立即支付</van-button></van-col>
-        </van-row>
+        </van-row>&ndash;&gt;
       </van-cell>
 
-    </div>
+    </div>-->
 
 
     <div class="two-panel-class">

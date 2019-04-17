@@ -94,6 +94,7 @@
     },
 
     methods: {
+
       changePhone(value) {
         let self = this;
         self.form.phone = value.mp.detail;
