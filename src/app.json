@@ -1,17 +1,13 @@
 {
   "pages": [
-    "pages/payinfo/main",
+    "pages/shouquan/main",
     "pages/index/main",
     "pages/order/main",
     "pages/counter/main",
     "pages/mine/main",
     "pages/submit/main",
     "pages/item/main",
-    "pages/shouquan/main"
-
-
-
-
+    "pages/payinfo/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,23 +20,26 @@
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
     "borderStyle": "white",
-
-    "list": [{
-      "text": "首页",
-      "pagePath": "pages/index/main",
-      "iconPath": "static/tabs/home.png",
-      "selectedIconPath": "static/tabs/home-active.png"
-    }, {
-      "text": "订单",
-      "pagePath": "pages/order/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
-    }, {
-      "text": "我的",
-      "pagePath": "pages/mine/main",
-      "iconPath": "static/tabs/user.png",
-      "selectedIconPath": "static/tabs/user-active.png"
-    }],
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/main",
+        "iconPath": "static/tabs/home.png",
+        "selectedIconPath": "static/tabs/home-active.png"
+      },
+      {
+        "text": "订单",
+        "pagePath": "pages/order/main",
+        "iconPath": "static/tabs/orders.png",
+        "selectedIconPath": "static/tabs/orders-active.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/main",
+        "iconPath": "static/tabs/user.png",
+        "selectedIconPath": "static/tabs/user-active.png"
+      }
+    ],
     "position": "bottom"
   }
 }
