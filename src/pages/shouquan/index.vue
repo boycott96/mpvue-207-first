@@ -57,17 +57,51 @@
     methods:{
      //获取用户登陆信息
       handleGetUserInfo(){
+        let self=this;
         wx.getUserInfo({
           success:(data)=>{
             console.log(data)
             //更新data中的数据
-            this.userInfo=data.userInfo
-            this.isShow=true
+
+
+            self.userInfo = data.userInfo;
+            self.isShow = true;
             wx.login({
               success(res) {
-                console.log(res)
+                //debugger;
+                wx.request({
+                  url: "http://188.131.244.83:8769/api/v1/service-user/user/getOpenId",
+                  data: {
+                    jsCode: res.code
+                  },
+                  method: "GET",
+                  dataType: "json",
+                  success: (data) => {
+                    //将openid存进本地缓存
+                    wx.setStorage({
+                      key:"openid",
+                      data:data.data.data.openid
+                    });
+                    let entity = {
+                      avatarUrl: self.userInfo.avatarUrl,
+                      city: self.userInfo.city,
+                      country: self.userInfo.country,
+                      gender: self.userInfo.gender,
+                      language: self.userInfo.language,
+                      nickname: self.userInfo.nickName,
+                      province: self.userInfo.province,
+                      userOpenId: data.data.data.openid
+                    };
+                    wx.request({
+                      url: "http://188.131.244.83:8769/api/v1/service-user/user",
+                      data: entity,
+                      method: "POST",
+                      dataType: "json"
+                    });
+                  }
+                });
               }
-            })
+            });
           },
           fail:()=>{
             console.log('获取失败')

@@ -17,8 +17,8 @@
 
       <!--<van-cell :title="title" :value="+" size="large" label="描述信息"/>-->
 
-      <van-cell class="company-class" title="收件人姓名" value="小王" size="large"></van-cell>
-      <van-cell class="company-class" title="手机尾号" :value="submit.phone" size="large"></van-cell>
+      <van-cell class="company-class" title="收件人姓名" :value="submit.expressName" size="large"></van-cell>
+      <van-cell class="company-class" title="手机尾号" :value="submit.tel_last" size="large"></van-cell>
     </div>
 
     <van-submit-bar :price="money" button-text="提交订单" @click="submitOrder"></van-submit-bar>
@@ -37,7 +37,7 @@
       <div class="inner-address-class">
 
         <van-cell-group v-for="(item, index) in addressData" :key="index">
-          <van-cell :title="item.name + ',' + item.phone" :label="item.city + item.address"
+          <van-cell :title="item.name + ',' + item.phone" :label="item.city + item.colleage + item.detail_address"
                     @click="select_address(item)">
             <van-icon slot="right-icon" name="edit" class="custom-icon" size="20px"
                       @click="editAddress(item)"></van-icon>
@@ -104,29 +104,34 @@
         //地址数据
         addressData: [{
           name: "张三",
-          phone: "13855036835",
-          city: "浙江省杭州市西湖区",
-          address: "文三路138号东方通信大厦7楼501室"
+          phone: "13855031111",
+          city: "安徽省滁州市凤阳县",
+          colleage:"安徽科技学院",
+          detail_address: "东四207"
         }, {
           name: "李四",
-          phone: "13855036835",
-          city: "浙江省杭州市西湖区",
-          address: "文三路138号东方通信大厦7楼501室"
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
         }, {
-          name: "李四",
-          phone: "13855036835",
-          city: "浙江省杭州市西湖区",
-          address: "文三路138号东方通信大厦7楼501室"
+          name: "王五",
+          phone: "13855033333",
+          city: "江苏省南京市宣武区",
+          colleage:"南京林业大学",
+          detail_address: "御园606"
         }, {
-          name: "李四",
-          phone: "13855036835",
-          city: "浙江省杭州市西湖区",
-          address: "文三路138号东方通信大厦7楼501室"
+          name: "刘能",
+          phone: "13855034444",
+          city: "黑龙江省哈尔滨",
+          colleage:"东北大学",
+          detail_address: "东八707"
         }, {
-          name: "李四",
-          phone: "13855036835",
-          city: "浙江省杭州市西湖区",
-          address: "文三路138号东方通信大厦7楼501室"
+          name: "谢广坤",
+          phone: "13855035555",
+          city: "辽宁省沈阳市",
+          colleage:"长春工业大学",
+          detail_address: "西五301"
         }],
         //选中的地址参数
         address: "",
@@ -135,19 +140,6 @@
         //时间数据保存
         timeData: new Date().getTime(),
         time: new Date().toLocaleString(),
-        //封装该页数据
-        // item:{
-        //   phone: "",
-        //   company: "",
-        //   currentDate: "",
-        //   count: "",
-        //   weight: "",
-        //   type: "",
-        //   univercity:"",
-        //   detail_address:"",
-        //   time:"",
-        //
-        // },
         title: "",
         money: 1,
         label: "小计:共",
@@ -161,8 +153,14 @@
           weight: "",
           type: "",
           address: "",
-          phone: "",
-          openid: ""
+          tel_last: "",
+          openid: "",
+          colleage:"",
+          detail_address:"",
+          tel:"",
+          name:"",
+          money:"",
+          expressName:""
         }
 
       };
@@ -171,17 +169,27 @@
       console.log("跳转成功");
       // console.log(options.phone)
       console.log(options);
-      this.submit.phone = options.phone;
+      wx.getStorage({
+        key:"openid",
+        success:(res)=> {
+         console.log(res.data);
+          this.submit.openid=res.data;
+        }
+      });
+      this.submit.tel_last = options.phone;
       this.submit.count = options.count;
       this.submit.company = options.company;
       this.submit.data = options.currentData;
       this.submit.type = options.type;
       this.submit.weight = options.weight;
-
+      //this.submit.openid=openid;
+      this.submit.money = options.money*100;
+      this.submit.expressName=options.name;
 
       this.title = options.company;
       this.money = options.money * 100;
       this.count = options.count;
+
 
 
     },
@@ -200,8 +208,41 @@
 
       //提交订单
       submitOrder() {
-        console.log(this.submit);
-
+        let self=this;
+        //console.log(self.submit);
+        //let data=this.submit;
+        //console.log('=========');
+        let entity = {
+          userOpenId: self.submit.openid,
+          receiverName: self.submit.name,//收货地址中的名字
+          expressReceiveName: self.submit.expressName,//快件上的名字
+          receiverMobile: self.submit.tel,//快件地址中的电话
+          expressCompany: self.submit.company,//快件公司
+         //expressArriveDate:self.submit.data,//收件日期
+          receiverCollegeName: self.submit.colleage,//大学名称
+          receiverProvince: "",//省
+          receiverCity: "",//城市
+          receiverDistrict: "",//地区
+          receiverAddress: self.submit.detail_address,//xxx栋xxx宿舍
+          //orderPayment: self.submit.money,//支付金额
+          //expressWeightLevel:"",//快件重量
+          expressType: self.submit.type,//快件种类
+          expressTailNum: self.submit.tel_last,//快件的手机尾号
+          expressSerialNum: ""
+        };
+        console.log(entity);
+        wx.request({
+          url: "http://188.131.244.83/api/v1/assist-get/order/create",
+          data: entity,
+          method: "POST",
+          // header:{
+          //   'content-type': 'application/json'
+          // },
+          dataType: "json",
+          success(res) {
+            console.log(res)
+          }
+        })
 
       },
       editAddress(){
@@ -213,9 +254,19 @@
 
       select_address(data) {
         this.addressShow = false;
-        this.addressTitle = data.address;
-        this.address = data.name + data.phone;
+
+
+        this.addressTitle = data.colleage+data.detail_address;
+        this.address = data.name + " " + data.phone;
         this.isSelectAddress = false;
+        this.submit.tel=data.phone;
+        this.submit.detail_address=data.detail_address;
+        this.submit.name=data.name;
+        this.submit.colleage=data.colleage;
+        this.submit.detail_address=data.detail_address;
+        this.submit.address=data.city;
+
+
       },
 
       //选中地址事件

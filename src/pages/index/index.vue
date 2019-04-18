@@ -5,6 +5,9 @@
         <van-field placeholder="请输入快件手机尾号" v-model="form.phone" :value="form.phone" label="手机尾号" left-icon="phone"
                    :border="false"
                    @change="changePhone"></van-field>
+        <van-field placeholder="请输入收件人名字" v-model="form.name" :value="form.name" label="收件名字" left-icon="phone"
+                   :border="false"
+                   @change="changeName"></van-field>
 
         <van-field label="快递公司" left-icon="wap-home" :border="false" :value="form.company" readonly
                    @click="activeSelect"></van-field>
@@ -62,6 +65,7 @@
         //表单
         form: {
           phone: "",
+          name:"",
           company: "韵达快递",
           currentDate: new Date().toLocaleString().substr(0, new Date().toLocaleString().indexOf(" ")),
           count: "1",
@@ -98,6 +102,11 @@
       changePhone(value) {
         let self = this;
         self.form.phone = value.mp.detail;
+      },
+
+      changeName(value) {
+        let self = this;
+        self.form.name = value.mp.detail;
       },
       //选中日期
       onConfirmDate(event) {
@@ -179,7 +188,7 @@
           wx.navigateTo({
             url: "/pages/submit/main?phone=" + this.form.phone + "&company=" + this.form.company
               + "&count=" + this.form.count + "&type=" + this.form.type + "&weight=" + this.form.weight
-              + "&currentData=" + this.form.currentDate + "&money=" + money,
+              + "&currentData=" + this.form.currentDate + "&money=" + money+"&name="+this.form.name,
           });
         }
       }
