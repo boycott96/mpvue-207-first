@@ -27,9 +27,9 @@
       <van-row class="title-class">
         <van-col span="4" class="cancel-class" @click="addressShow = false"><span>取消</span></van-col>
         <van-col span="16"><span>我的收货地址</span></van-col>
-        <van-col span="4" class="add-icon-class">
+        <!--<van-col span="4" class="add-icon-class">
           <van-icon name="plus" @click="addAddress" class="back-icon"></van-icon>
-        </van-col>
+        </van-col>-->
       </van-row>
 
 
@@ -37,52 +37,16 @@
       <div class="inner-address-class">
 
         <van-cell-group v-for="(item, index) in addressData" :key="index">
+
           <van-cell :title="item.name + ',' + item.phone" :label="item.city + item.colleage + item.detail_address"
                     @click="select_address(item)">
             <van-icon slot="right-icon" name="edit" class="custom-icon" size="20px"
                       @click="editAddress(item)"></van-icon>
           </van-cell>
         </van-cell-group>
-
-      <!--  <van-popup :show="editAddressShow" position="right" class="right-popup-inner">
-          <div class="back-div-class">
-            <van-icon name="arrow-left" @click="editAddressShow = false" class="back-icon"></van-icon>
-          </div>
-
-          <div class="edit-address-class">
-            <van-cell-group class="address-cell-group-class">
-              <van-field :value="addressForm.name" clearable label="姓名" left-icon="user-o"
-                         placeholder="收货人姓名"></van-field>
-              <van-field :value="addressForm.phone" type="text" label="电话" placeholder="收货人手机号"
-                         left-icon="phone-circle-o"
-                         :border="false"></van-field>
-              <van-field :value="addressForm.city" type="text" label="地区" left-icon="home-o" readonly
-                         placeholder="省/市/区"
-                         :border="false" @click="activeArea"></van-field>
-              <van-field :value="addressForm.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等"
-                         left-icon="aim"
-                         :border="false"></van-field>
-              <van-popup :show="show" position="bottom">
-                <van-area :area-list="AreaList" value="110101" @cancel="show = false" @confirm="onArea"></van-area>
-              </van-popup>
-            </van-cell-group>
-            <div>
-              <van-button type="danger" size="large" class="inner-button-class" @click="submit">保存</van-button>
-              <van-button size="large" class="inner-button-class" @click="deleteAddress">删除</van-button>
-            </div>
-          </div>
-        </van-popup>-->
-
-
-
-
-
-
-
-
-
-
-
+        <van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">
+          新增收货地址
+        </van-button>
 
       </div>
     </van-popup>
@@ -115,23 +79,47 @@
           colleage:"安徽农业大学",
           detail_address: "研究生404"
         }, {
-          name: "王五",
-          phone: "13855033333",
-          city: "江苏省南京市宣武区",
-          colleage:"南京林业大学",
-          detail_address: "御园606"
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
         }, {
-          name: "刘能",
-          phone: "13855034444",
-          city: "黑龙江省哈尔滨",
-          colleage:"东北大学",
-          detail_address: "东八707"
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
         }, {
-          name: "谢广坤",
-          phone: "13855035555",
-          city: "辽宁省沈阳市",
-          colleage:"长春工业大学",
-          detail_address: "西五301"
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
+        }, {
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
+        }, {
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
+        }, {
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
+        }, {
+          name: "李四",
+          phone: "13855032222",
+          city: "安徽省合肥市",
+          colleage:"安徽农业大学",
+          detail_address: "研究生404"
         }],
         //选中的地址参数
         address: "",
@@ -177,7 +165,7 @@
         }
       });
       this.submit.tel_last = options.phone;
-      this.submit.count = options.count;
+      this.submit.count = options.count*1.0;
       this.submit.company = options.company;
       this.submit.data = options.currentData;
       this.submit.type = options.type;
@@ -185,6 +173,7 @@
       //this.submit.openid=openid;
       this.submit.money = options.money*100;
       this.submit.expressName=options.name;
+      this.submit.weight = options.weight*1.0;
 
       this.title = options.company;
       this.money = options.money * 100;
@@ -213,7 +202,7 @@
         //let data=this.submit;
         //console.log('=========');
         let entity = {
-          userOpenId: self.submit.openid,
+        /*  userOpenId: self.submit.openid,
           receiverName: self.submit.name,//收货地址中的名字
           expressReceiveName: self.submit.expressName,//快件上的名字
           receiverMobile: self.submit.tel,//快件地址中的电话
@@ -228,19 +217,45 @@
           //expressWeightLevel:"",//快件重量
           expressType: self.submit.type,//快件种类
           expressTailNum: self.submit.tel_last,//快件的手机尾号
-          expressSerialNum: ""
+          expressSerialNum: ""*/
+
+
+         // "expressArriveDate": self.submit.data,
+          "expressCompany": self.submit.company,
+          "expressReceiveName": self.submit.expressName,
+          "expressSerialNum": "",
+          "expressTailNum": self.submit.tel_last,
+          "expressType":  self.submit.type,
+          "expressWeightLevel": 0,
+          "expressCount":self.submit.count,
+
+          //"orderPayment": self.submit.money,
+          "orderStatus": 0,
+          "expressWeightLevel":self.submit.weight,
+          "receiverAddress": self.submit.detail_address,
+          "receiverCity": "",
+          "receiverCollegeName": self.submit.colleage,
+          "receiverDistrict": "",
+          "receiverMobile": self.submit.tel,
+          "receiverName": self.submit.name,
+          "receiverProvince": "",
+          "userOpenId": self.submit.openid
         };
         console.log(entity);
         wx.request({
-          url: "http://188.131.244.83/api/v1/assist-get/order/create",
+          url: "https://api.ypaot.com/api/v1/assist-get/order/create",
           data: entity,
           method: "POST",
-          // header:{
-          //   'content-type': 'application/json'
-          // },
-          dataType: "json",
+          header:{
+            'content-type': 'application/json'
+          },
+          //dataType: "json",
           success(res) {
-            console.log(res)
+            console.log(res.data);
+
+            wx.navigateTo({
+              url:"/pages/payinfo/main?data="+JSON.stringify(res.data.data)
+            })
           }
         })
 
@@ -336,10 +351,11 @@
     line-height: 40px;
     font-size: 16px;
     text-align: center;
+
   }
 
   .address-popup-class .van-popup--bottom {
-    height: 300px;
+    height: 70%;
   }
 
   .inner-address-class {

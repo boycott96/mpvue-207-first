@@ -15,9 +15,9 @@ export default {
       success(res) {
         console.log('kkkk')
         if(res.data){
-          wx.switchTab({
+         /* wx.switchTab({
             url:'/pages/index/main'
-          })
+          })*/
         }
       }
 

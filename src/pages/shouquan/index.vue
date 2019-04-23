@@ -34,9 +34,9 @@
           console.log('kkkk')
           if(res.data){
             console.log(res.data)
-            wx.switchTab({
+            /*wx.switchTab({
               url:'/pages/index/main'
-            })
+            })*/
           }
         }
       })
@@ -68,15 +68,15 @@
             self.isShow = true;
             wx.login({
               success(res) {
+                console.log(res.code)
                 //debugger;
                 wx.request({
-                  url: "http://188.131.244.83:8769/api/v1/service-user/user/getOpenId",
-                  data: {
-                    jsCode: res.code
-                  },
+                  url: "https://api.ypaot.com/api/v1/service-user/user/openId/"+res.code,
+
                   method: "GET",
                   dataType: "json",
                   success: (data) => {
+                    console.log(data)
                     //将openid存进本地缓存
                     wx.setStorage({
                       key:"openid",
@@ -93,7 +93,7 @@
                       userOpenId: data.data.data.openid
                     };
                     wx.request({
-                      url: "http://188.131.244.83:8769/api/v1/service-user/user",
+                      url: "https://api.ypaot.com/api/v1/service-user/user",
                       data: entity,
                       method: "POST",
                       dataType: "json"

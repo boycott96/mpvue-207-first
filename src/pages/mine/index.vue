@@ -23,6 +23,44 @@
           </van-col>
         </van-row>
       </div>
+<!-- ==============-->
+      <van-popup :show="addShow" position="right" class="right-popup-inner">
+        <div class="back-div-class">
+          <van-icon name="arrow-left" @click="addShow = false" class="back-icon"></van-icon>
+        </div>
+        <div class="edit-address-class">
+          <van-cell-group class="address-cell-group-class">
+            <van-field :value="add.name" clearable label="姓名" left-icon="user-o"
+                       placeholder="收货人姓名" @change="changeName"></van-field>
+            <van-field :value="add.phone" type="text" label="电话" placeholder="收货人手机号"
+                       left-icon="phone-circle-o"
+                       :border="false" @change="changePhone"></van-field>
+            <van-field :value="add.city" type="text" label="地区" left-icon="home-o" readonly
+                       placeholder="省/市/区"
+                       :border="false" @click="activeArea" @change="changeArea"></van-field>
+            <van-field :value="add.colleage" type="text" label="学校" placeholder="所在学校"
+                       left-icon="phone-circle-o"
+                       :border="false" @change="changeColleage"></van-field>
+
+
+            <van-field :value="add.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等"
+                       left-icon="aim"
+                       :border="false" @change="changeAddress"></van-field>
+
+
+            <!--区域弹出框-->
+            <van-popup :show="show" position="bottom">
+              <van-area :area-list="AreaList" value="110101" @cancel="show = false" @confirm="onArea"></van-area>
+            </van-popup>
+          </van-cell-group>
+
+          <div>
+            <van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">保存</van-button>
+          </div>
+        </div>
+      </van-popup>
+      <!--============== -->
+
       <div class="edit-address-class">
         <van-cell-group v-for="(item, index) in addressData" :key="index">
           <van-cell :title="item.name + ',' + item.phone" :label="item.city + item.address">
@@ -80,6 +118,7 @@
         show: false,
         addressShow: false,
         editAddressShow: false,
+        addShow:false,
         addressData: [{
           name: "张三",
           phone: "13855036835",
@@ -98,6 +137,14 @@
           city: "",
           address: ""
         },
+        add: {
+          userOpenId:"",
+          name: "",
+          phone: "",
+          city: "",
+          colleage:"",
+          address: ""
+        },
         AreaList: {
           province_list: {
             110000: "北京市"
@@ -111,7 +158,42 @@
         }
       };
     },
+    onLoad(){
+      wx.getStorage({
+        key:"openid",
+        success:(res)=> {
+          console.log(res.data);
+          this.add.userOpenId=res.data;
+        }
+      });
+    },
     methods: {
+      changePhone(value) {
+        let self = this;
+        self.add.phone = value.mp.detail;
+      },
+
+      changeName(value) {
+        let self = this;
+        self.add.name = value.mp.detail;
+      },
+
+      changeAddress(value) {
+        let self = this;
+        self.add.address = value.mp.detail;
+      },
+
+      changeArea(value){
+        let self = this;
+        self.add.city = value.mp.detail;
+      },
+
+      changeColleage(value){
+        let self = this;
+        self.add.colleage = value.mp.detail;
+      },
+
+
       //选中市区
       onArea(data) {
         this.show = false;
@@ -135,23 +217,44 @@
       //激活新增地址
       addAddress() {
         let self = this;
-        self.editAddressShow = true;
+        self.addShow = true;
       },
 
       //激活编辑地址
       editAddress(value) {
         let self = this;
         self.editAddressShow = true;
-        self.addressForm = value;
+        self.addressForm = value
       },
 
       //提交表单
-      submit() {
+      addsubmit() {
         let self = this;
-        if (self.addressForm.name == null || self.addressForm.name === "") {
+        //let self = this;
+   /*     if (self.addressForm.name == null || self.addressForm.name === "") {
           this.$toast.success("姓名不可为空");
         }
-        this.editAddressShow = false;
+        this.editAddressShow = false;*/
+        console.log(this.add)
+        let entity = {
+          "userOpenId": self.add.userOpenId,
+          "receiverName": self.add.name,
+          "receiverCollegeName":self.add.colleage,
+          "receiverMobile":self.add.phone,
+          "receiverAddress":self.add.address,
+        }
+        console.log(entity);
+        wx.request({
+          url:"https://api.ypaot.com/api/v1/service-user/receive-info",
+          data: entity,
+          method: "POST",
+          header:{
+            'content-type': 'application/json'
+          },
+          success(res) {
+            console.log(res)
+          }
+        })
       },
 
       //删除地址

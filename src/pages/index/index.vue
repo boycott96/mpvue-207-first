@@ -177,18 +177,21 @@
           // console.log(this.form.phone);
           //console.log(this.form);
           var money;
+          var weight;
           var str = this.form.weight;
           if (str == "(0kg,5kg]") {
             money = this.form.count * 1.0;
+            weight=0*1.0;
           } else {
             money = this.form.count * 3.0;
+            weight=1*1.0;
           }
 
           console.log(money);
           wx.navigateTo({
             url: "/pages/submit/main?phone=" + this.form.phone + "&company=" + this.form.company
               + "&count=" + this.form.count + "&type=" + this.form.type + "&weight=" + this.form.weight
-              + "&currentData=" + this.form.currentDate + "&money=" + money+"&name="+this.form.name,
+              + "&currentData=" + this.form.currentDate + "&weight=" + weight+"&name="+this.form.name+"&money="+money,
           });
         }
       }
