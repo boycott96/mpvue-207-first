@@ -1,41 +1,38 @@
 <template>
-    <div class="edit-address-class">
-      <van-cell-group class="address-cell-group-class">
-        <van-field :value="add.name" clearable label="姓名" left-icon="user-o"
-                   placeholder="收货人姓名" @change="changeName"></van-field>
-        <van-field :value="add.phone" type="text" label="电话" placeholder="收货人手机号"
-                   left-icon="phone-circle-o"
-                   :border="false" @change="changePhone"></van-field>
-        <van-field :value="add.area" type="text" label="地区" left-icon="home-o" readonly
-                   placeholder="省/市/区"
-                   :border="false" @click="activeArea"></van-field>
-        <van-field :value="add.colleage" type="text" label="学校" placeholder="所在学校"
-                   left-icon="phone-circle-o"
-                   :border="false" @change="changeColleage"></van-field>
+  <div class="edit-address-class">
+    <van-cell-group class="address-cell-group-class">
+      <van-field :value="add.name" clearable label="姓名" left-icon="user-o"
+                 placeholder="收货人姓名" @change="changeName"></van-field>
+      <van-field :value="add.phone" type="text" label="电话" placeholder="收货人手机号"
+                 left-icon="phone-circle-o"
+                 :border="false" @change="changePhone"></van-field>
+      <van-field :value="add.area" type="text" label="地区" left-icon="home-o" readonly
+                 placeholder="省/市/区"
+                 :border="false" @click="activeArea"></van-field>
+      <van-field :value="add.colleage" type="text" label="学校" placeholder="所在学校"
+                 left-icon="phone-circle-o"
+                 :border="false" @change="changeColleage"></van-field>
 
 
-        <van-field :value="add.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等"
-                   left-icon="aim"
-                   :border="false" @change="changeAddress"></van-field>
+      <van-field :value="add.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等"
+                 left-icon="aim"
+                 :border="false" @change="changeAddress"></van-field>
 
 
-        <!--区域弹出框-->
-        <van-popup :show="show" position="bottom">
-          <van-area :area-list="AreaList"  @cancel="show = false" @confirm="onArea"></van-area>
-        </van-popup>
-      </van-cell-group>
-      <div class="div1">
-        <div class="div2"><van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">保存</van-button></div>
-        <div class="div3"><van-button size="large"  class="inner-button-class" @click="deleteAddress">删除</van-button></div>
-
-      </div>
-
+      <!--区域弹出框-->
+      <van-popup :show="show" position="bottom">
+        <van-area :area-list="AreaList" @cancel="show = false" @confirm="onArea"></van-area>
+      </van-popup>
+    </van-cell-group>
+    <div class="div1">
+      <div class="div2"><van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">保存</van-button></div>
     </div>
+
+  </div>
 </template>
 
 <script>
   export default {
-    name: "index",
     data:()=>{
       return {
         show:false,
@@ -172,8 +169,8 @@
             341881: '宁国市',
           }
         },
+
         add: {
-          id:"",
           userOpenId:"",
           name: "",
           phone: "",
@@ -186,19 +183,14 @@
         }
       }
     },
-    onLoad(options){
-      console.log('options')
-      //console.log(options)
-      let data = JSON.parse(options.item)
-      console.log(data)
-          this.add.name=data.receiverName,
-          //this.add.city=data.receiverCollegeName,
-          this.add.address=data.receiverAddress,
-          this.add.phone = data.receiverMobile,
-          this.add.colleage = data.receiverCollegeName,
-          this.add.userOpenId = data.userOpenId,
-          this.add.id = data.id,
-          this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict
+    onLoad(){
+      wx.getStorage({
+        key:"openid",
+        success:(res)=> {
+          console.log(res.data);
+          this.add.userOpenId=res.data;
+        }
+      })
     },
     methods: {
       changePhone(value) {
@@ -225,77 +217,54 @@
         let self = this;
         self.add.colleage = value.mp.detail;
       },
+      //激活区域弹出框
       activeArea(){
         this.show = true;
       },
-      onArea(data){
+      //选中市区
+      onArea(data) {
         this.show = false;
         this.add.area = data.mp.detail.values[0].name + data.mp.detail.values[1].name + data.mp.detail.values[2].name;
         this.add.province = data.mp.detail.values[0].name;
         this.add.city = data.mp.detail.values[1].name;
         this.add.district = data.mp.detail.values[2].name;
+
       },
+
       addsubmit(){
         let self = this;
-        console.log(this.add)
-        console.log('lll')
-        //console.log(self.add)
-        let entity = {
-
-          "id": self.add.id,
-          "receiverAddress": self.add.address,
-          "receiverCity": self.add.city,
-          "receiverCollegeName": self.add.colleage,
-          "receiverDistrict": self.add.district,
-          "receiverMobile": self.add.phone ,
+        let entity={
+          "userOpenId": self.add.userOpenId,
           "receiverName": self.add.name,
+          "receiverCollegeName":self.add.colleage,
+          "receiverMobile":self.add.phone,
+          "receiverAddress":self.add.address,
           "receiverProvince": self.add.province,
-          "userOpenId": self.add.userOpenId
+          "receiverCity": self.add.city,
+          "receiverDistrict": self.add.district
         };
         console.log(entity)
-
         wx.request({
-          url:"http://188.131.244.83/api/v1/service-user/receive-info",
+          url:"https://api.ypaot.com/api/v1/service-user/receive-info",
           data: entity,
-          method: "PUT",
-          header: {
+          method: "POST",
+          header:{
             'content-type': 'application/json'
           },
           success(res) {
             console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
-            })
-          }
-        })
-      },
-      deleteAddress(){
-        console.log('delete')
-        console.log(this.add.id)
-        wx.request({
-          url:"http://188.131.244.83/api/v1/service-user/receive-info",
-          data:{
-            "id": this.add.id
-          },
-          method: "DELETE",
-          header: {
-            'content-type': 'application/json'
-          },
-          success(res) {
-            console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
-            })
-          }
-        })
-      }
-    },
+            wx.navigateBack({
 
+            })
+          }
+        })
+
+      }
+    }
   };
 </script>
 
 <style>
-
   .address-cell-group-class{
     margin-bottom: 20px;
   }
@@ -314,7 +283,7 @@
     margin: 0 auto;
     margin-top: 20px;
   }
- .div3{
-   margin-top: 20px;
- }
+  .div3{
+    margin-top: 20px;
+  }
 </style>

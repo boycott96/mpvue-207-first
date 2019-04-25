@@ -205,13 +205,16 @@
       },
       //激活地址
       selectAddress() {
-        this.addressForm = {
+      /*  this.addressForm = {
           name: "",
           phone: "",
           city: "",
           address: ""
         };
-        this.addressShow = true;
+        this.addressShow = true;*/
+      wx.navigateTo({
+        url:"/pages/address/main"
+      })
       },
 
       //激活新增地址

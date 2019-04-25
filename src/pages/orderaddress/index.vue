@@ -1,36 +1,36 @@
 <template>
-    <div class="edit-address-class">
-      <van-cell-group class="address-cell-group-class">
-        <van-field :value="add.name" clearable label="姓名" left-icon="user-o"
-                   placeholder="收货人姓名" @change="changeName"></van-field>
-        <van-field :value="add.phone" type="text" label="电话" placeholder="收货人手机号"
-                   left-icon="phone-circle-o"
-                   :border="false" @change="changePhone"></van-field>
-        <van-field :value="add.area" type="text" label="地区" left-icon="home-o" readonly
-                   placeholder="省/市/区"
-                   :border="false" @click="activeArea"></van-field>
-        <van-field :value="add.colleage" type="text" label="学校" placeholder="所在学校"
-                   left-icon="phone-circle-o"
-                   :border="false" @change="changeColleage"></van-field>
+  <div class="edit-address-class">
+    <van-cell-group class="address-cell-group-class">
+      <van-field :value="add.name" clearable label="姓名" left-icon="user-o"
+                 placeholder="收货人姓名" @change="changeName"></van-field>
+      <van-field :value="add.phone" type="text" label="电话" placeholder="收货人手机号"
+                 left-icon="phone-circle-o"
+                 :border="false" @change="changePhone"></van-field>
+      <van-field :value="add.area" type="text" label="地区" left-icon="home-o" readonly
+                 placeholder="省/市/区"
+                 :border="false" @click="activeArea"></van-field>
+      <van-field :value="add.colleage" type="text" label="学校" placeholder="所在学校"
+                 left-icon="phone-circle-o"
+                 :border="false" @change="changeColleage"></van-field>
 
 
-        <van-field :value="add.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等"
-                   left-icon="aim"
-                   :border="false" @change="changeAddress"></van-field>
+      <van-field :value="add.address" type="text" label="详细地址" placeholder="街道门牌号、楼层房间号等"
+                 left-icon="aim"
+                 :border="false" @change="changeAddress"></van-field>
 
 
-        <!--区域弹出框-->
-        <van-popup :show="show" position="bottom">
-          <van-area :area-list="AreaList"  @cancel="show = false" @confirm="onArea"></van-area>
-        </van-popup>
-      </van-cell-group>
-      <div class="div1">
-        <div class="div2"><van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">保存</van-button></div>
-        <div class="div3"><van-button size="large"  class="inner-button-class" @click="deleteAddress">删除</van-button></div>
-
-      </div>
+      <!--区域弹出框-->
+      <van-popup :show="show" position="bottom">
+        <van-area :area-list="AreaList"  @cancel="show = false" @confirm="onArea"></van-area>
+      </van-popup>
+    </van-cell-group>
+    <div class="div1">
+      <div class="div2"><van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">保存</van-button></div>
+      <div class="div3"><van-button size="large"  class="inner-button-class" @click="deleteAddress">删除</van-button></div>
 
     </div>
+
+  </div>
 </template>
 
 <script>
@@ -191,14 +191,14 @@
       //console.log(options)
       let data = JSON.parse(options.item)
       console.log(data)
-          this.add.name=data.receiverName,
-          //this.add.city=data.receiverCollegeName,
-          this.add.address=data.receiverAddress,
-          this.add.phone = data.receiverMobile,
-          this.add.colleage = data.receiverCollegeName,
-          this.add.userOpenId = data.userOpenId,
-          this.add.id = data.id,
-          this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict
+      this.add.name=data.receiverName,
+        //this.add.city=data.receiverCollegeName,
+        this.add.address=data.receiverAddress,
+        this.add.phone = data.receiverMobile,
+        this.add.colleage = data.receiverCollegeName,
+        this.add.userOpenId = data.userOpenId,
+        this.add.id = data.id,
+        this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict
     },
     methods: {
       changePhone(value) {
@@ -263,8 +263,8 @@
           },
           success(res) {
             console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
+            wx.navigateBack({
+
             })
           }
         })
@@ -283,8 +283,8 @@
           },
           success(res) {
             console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
+            wx.navigateBack({
+
             })
           }
         })
@@ -314,7 +314,7 @@
     margin: 0 auto;
     margin-top: 20px;
   }
- .div3{
-   margin-top: 20px;
- }
+  .div3{
+    margin-top: 20px;
+  }
 </style>

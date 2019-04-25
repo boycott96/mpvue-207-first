@@ -2,7 +2,7 @@
     <div>
      <div class="div2">
       <van-cell-group v-for="(item, index) in addressData" :key="index">
-        <van-cell :title="item.receiverName + ' ' + item.receiverMobile" :label="item.receiverCollegeName + item.receiverAddress">
+        <van-cell :title="item.receiverName + ' ' + item.receiverMobile" :label="item.receiverCollegeName +  ' ' + item.receiverAddress">
           <van-icon slot="right-icon" name="edit" class="custom-icon" size="20px"
                     @click="editAddress(item)"></van-icon>
         </van-cell>
@@ -95,8 +95,8 @@
       //height: 50px;
     }*/
   .inner-button-class{
-    position: fixed;
-    bottom:0;
-    width: 100%;
-  }
+       position: fixed;
+       bottom:0;
+       width: 100%;
+     }
 </style>

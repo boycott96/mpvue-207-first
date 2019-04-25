@@ -22,8 +22,9 @@
     </div>
 
     <van-submit-bar :price="money" button-text="提交订单" @click="submitOrder"></van-submit-bar>
+
     <!--弹出层-->
-    <van-popup :show="addressShow" position="bottom" class="address-popup-class">
+    <van-popup :show="addressShow" position="bottom" class="address-popup-class" overlay="false" lock-scroll="true">
       <van-row class="title-class">
         <van-col span="4" class="cancel-class" @click="addressShow = false"><span>取消</span></van-col>
         <van-col span="16"><span>我的收货地址</span></van-col>
@@ -38,18 +39,21 @@
 
         <van-cell-group v-for="(item, index) in addressData" :key="index">
 
-          <van-cell :title="item.name + ',' + item.phone" :label="item.city + item.colleage + item.detail_address"
+          <van-cell :title="item.receiverName + ' ' + item.receiverMobile" :label="item.receiverCollegeName + ' ' + item.receiverAddress"
                     @click="select_address(item)">
             <van-icon slot="right-icon" name="edit" class="custom-icon" size="20px"
-                      @click="editAddress(item)"></van-icon>
+                      @click.stop="editAddress(item)"></van-icon>
           </van-cell>
         </van-cell-group>
+
+      </div>
+
         <van-button type="danger" size="large" class="inner-button-class" @click="addsubmit">
           新增收货地址
         </van-button>
 
-      </div>
     </van-popup>
+
     <van-popup :show="timeShow" position="bottom">
       <van-datetime-picker show-toolbar title="配送时间" @confirm="confirmTime" @cancel="timeShow = false"
                            :min-hour="minHour" type="time" :value="currentDate"></van-datetime-picker>
@@ -66,7 +70,7 @@
         //地址显示
         addressShow: false,
         //地址数据
-        addressData: [{
+        addressData: [/*{
           name: "张三",
           phone: "13855031111",
           city: "安徽省滁州市凤阳县",
@@ -120,7 +124,14 @@
           city: "安徽省合肥市",
           colleage:"安徽农业大学",
           detail_address: "研究生404"
-        }],
+        }*/],
+        add: {
+          name: "",
+          phone: "",
+          city: "",
+          colleage:"",
+          detail_address: ""
+        },
         //选中的地址参数
         address: "",
         //时间显示
@@ -148,7 +159,11 @@
           tel:"",
           name:"",
           money:"",
-          expressName:""
+          expressName:"",
+          province:"",
+          district:"",
+          city:""
+
         }
 
       };
@@ -160,8 +175,8 @@
       wx.getStorage({
         key:"openid",
         success:(res)=> {
-         console.log(res.data);
           this.submit.openid=res.data;
+
         }
       });
       this.submit.tel_last = options.phone;
@@ -174,12 +189,15 @@
       this.submit.money = options.money*100;
       this.submit.expressName=options.name;
       this.submit.weight = options.weight*1.0;
-
       this.title = options.company;
       this.money = options.money * 100;
       this.count = options.count;
+    },
+    onShow() {
+      console.log("----onshow---");
 
-
+      this.getaddresslist()
+      console.log("地址");
 
     },
     beforeMount() {
@@ -190,9 +208,44 @@
       selectTime() {
 
       },
+      getaddresslist(){
+        wx.getStorage({
+          key:"openid",
+          success:(res)=> {
+
+            //this.add.userOpenId=res.data;
+            wx.request({
+              url:"http://188.131.244.83/api/v1/service-user/receive-info/list/"+res.data,
+              method: "GET",
+              success:(res)=>{
+                console.log(res.data.data)
+                this.addressData = res.data.data
+              }
+            })
+          }
+        })
+      },
       //激活选择地址
       selectAddress() {
+
         this.addressShow = true;
+        console.log(this.addressData)
+
+/*        wx.getStorage({
+          key:"openid",
+          success:(res)=> {
+            console.log(res.data);
+            //this.add.userOpenId=res.data;
+            wx.request({
+              url:"http://188.131.244.83/api/v1/service-user/receive-info/list/"+res.data,
+              method: "GET",
+              success:(res)=>{
+                console.log(res.data.data)
+                this.addressData = res.data.data
+              }
+            })
+          }
+        })*/
       },
 
       //提交订单
@@ -202,24 +255,6 @@
         //let data=this.submit;
         //console.log('=========');
         let entity = {
-        /*  userOpenId: self.submit.openid,
-          receiverName: self.submit.name,//收货地址中的名字
-          expressReceiveName: self.submit.expressName,//快件上的名字
-          receiverMobile: self.submit.tel,//快件地址中的电话
-          expressCompany: self.submit.company,//快件公司
-         //expressArriveDate:self.submit.data,//收件日期
-          receiverCollegeName: self.submit.colleage,//大学名称
-          receiverProvince: "",//省
-          receiverCity: "",//城市
-          receiverDistrict: "",//地区
-          receiverAddress: self.submit.detail_address,//xxx栋xxx宿舍
-          //orderPayment: self.submit.money,//支付金额
-          //expressWeightLevel:"",//快件重量
-          expressType: self.submit.type,//快件种类
-          expressTailNum: self.submit.tel_last,//快件的手机尾号
-          expressSerialNum: ""*/
-
-
          // "expressArriveDate": self.submit.data,
           "expressCompany": self.submit.company,
           "expressReceiveName": self.submit.expressName,
@@ -228,17 +263,16 @@
           "expressType":  self.submit.type,
           "expressWeightLevel": 0,
           "expressCount":self.submit.count,
-
           //"orderPayment": self.submit.money,
           "orderStatus": 0,
           "expressWeightLevel":self.submit.weight,
           "receiverAddress": self.submit.detail_address,
-          "receiverCity": "",
+          "receiverCity": self.submit.city,
           "receiverCollegeName": self.submit.colleage,
-          "receiverDistrict": "",
+          "receiverDistrict": self.submit.district,
           "receiverMobile": self.submit.tel,
           "receiverName": self.submit.name,
-          "receiverProvince": "",
+          "receiverProvince": self.submit.province,
           "userOpenId": self.submit.openid
         };
         console.log(entity);
@@ -260,26 +294,42 @@
         })
 
       },
-      editAddress(){
-       /* let self = this;
+      //编辑收获地址
+      editAddress(item){
+        /*let self = this;
         self.editAddressShow = true;
         self.addressForm = value;*/
+        console.log(item)
+        wx.navigateTo({
+          url:"/pages/orderaddress/main?item="+JSON.stringify(item)
+        })
       },
-
-
+      //新增收获地址
+      addsubmit(){
+        wx.navigateTo({
+          url:"/pages/ordernewaddress/main"
+        })
+      },
+      //选择收货地址
       select_address(data) {
         this.addressShow = false;
+        console.log(data)
 
-
-        this.addressTitle = data.colleage+data.detail_address;
-        this.address = data.name + " " + data.phone;
+        this.addressTitle = data.receiverCollegeName+data.receiverAddress;
+        this.address = data.receiverName + " " + data.receiverMobile;
         this.isSelectAddress = false;
-        this.submit.tel=data.phone;
-        this.submit.detail_address=data.detail_address;
-        this.submit.name=data.name;
-        this.submit.colleage=data.colleage;
-        this.submit.detail_address=data.detail_address;
-        this.submit.address=data.city;
+
+
+        this.submit.tel = data.receiverMobile;
+        this.submit.detail_address = data.receiverAddress;
+        this.submit.name = data.receiverName;
+        this.submit.colleage = data.receiverCollegeName;
+        this.submit.province = data.receiverProvince;
+        this.submit.district = data.receiverDistrict;
+        this.submit.city = data.receiverCity;
+
+        //this.submit.detail_address=data.detail_address;
+        //this.submit.address=data.city;
 
 
       },
@@ -347,7 +397,7 @@
   }
 
   .title-class {
-    height: 40px;
+    height: 10%;
     line-height: 40px;
     font-size: 16px;
     text-align: center;
@@ -359,8 +409,18 @@
   }
 
   .inner-address-class {
-    height: 200px;
-    overflow: auto;
+    height: 80%;
+    //overflow: auto;
   }
+  .btn{
+    height: 10%;
+  }
+
+  .inner-button-class{
+    position: fixed;
+    bottom:0;
+    width: 100%;
+  }
+
 
 </style>
