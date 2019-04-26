@@ -65,6 +65,7 @@
   export default {
     data: () => {
       return {
+        storageKeyName:"newOrder",
         addressTitle: "",
         isSelectAddress: true,
         //地址显示
@@ -215,7 +216,7 @@
 
             //this.add.userOpenId=res.data;
             wx.request({
-              url:"http://188.131.244.83/api/v1/service-user/receive-info/list/"+res.data,
+              url:"https://api.ypaot.com/api/v1/service-user/receive-info/list/"+res.data,
               method: "GET",
               success:(res)=>{
                 console.log(res.data.data)
@@ -246,6 +247,9 @@
             })
           }
         })*/
+      },
+      execSetStorageSync(data){
+        wx.setStorageSync(this.storageKeyName,data);
       },
 
       //提交订单
@@ -284,8 +288,9 @@
             'content-type': 'application/json'
           },
           //dataType: "json",
-          success(res) {
+          success:(res)=> {
             console.log(res.data);
+            this.execSetStorageSync(true);
 
             wx.navigateTo({
               url:"/pages/payinfo/main?data="+JSON.stringify(res.data.data)

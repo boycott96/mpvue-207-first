@@ -1,18 +1,18 @@
 <template>
-  <van-tabs :active="active"@click="onChange">
-
+  <div class="divp">
+  <van-tabs :active="0" @click="onChange" sticky="true">
     <van-tab title="全部订单">
       <div class="panel-class">
-        <van-card num="3" price="2.00" desc="2019-3-29 15-30-30" title="韵达快递" :thumb="imageURL">
-          <view slot="footer">
-            <van-button size="mini">删除</van-button>
-            <van-button size="mini" style="color: #07c160">去付款</van-button>
-          </view>
-     ` `</van-card>
+        <van-cell-group v-for="(item, index) in orderlist" :key = "index">
+              <van-card :num="item.expressCount" :price="item.orderPayment"  :desc="item.createTime" :title="item.expressCompany" :thumb="imageURL" @click="selectItem(item)">
+                <view slot="footer">
+                  <van-button size="mini">删除</van-button>
+                  <van-button size="mini" style="color: #07c160">{{item.orderStatus==0 ? "待付款": "去评价"}}</van-button>
+                </view>
+              </van-card>
+        </van-cell-group>
       </div>
-
     </van-tab>
-
 
     <van-tab title="待付款">
       <van-card num="3" price="2.00" desc="2019-3-29 15-30-30" title="韵达快递" :thumb="imageURL">
@@ -35,6 +35,7 @@
     </van-tab>
 
   </van-tabs>
+  </div>
 </template>
 
 <script>
@@ -42,18 +43,242 @@
     data(){
       return {
         active:1,
-        imageURL:"/static/images/sf.jpg"
+        imageURL:"/static/images/sf.jpg",
+        orderlist: [
+         /* {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "圆通快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },  {
+            expressCompany: "天天快递",
+            expressCount: "1",
+            orderPayment: "1.00",
+            createTime: "2019-3-29 15-30-30",
+            orderStatus: 0
+          },*/
+
+        ],
+        pageIndex:1,
+        isLoadedAll:false,
+        storageKeyName:"newOrder"
       };
     },
+    onShow(){
+      console.log('onShow')
+      let newOrderFlag = this.hasNewOrder();
+      if(newOrderFlag){
+        this.onPullDownRefresh();
+        this.pageIndex=1;
+        this.getOrderList();
+        this.execSetStorageSync(false)//更新标志位
+      }
+
+      /*wx.getStorage({
+        key: "openid",
+        success:(res)=> {
+          //console.log(res.data)
+          let entity = {
+            "page": this.pageIndex,
+            "size": 15,
+            "sort": "string",
+            "userOpenId": res.data
+          }
+          wx.request({
+              url:"https://api.ypaot.com/api/v1/assist-get/order/list",
+              data: entity,
+              method: "POST",
+              header: {
+                'content-type': 'application/json'
+              },
+              success:(res)=> {
+                console.log(res);
+                this.orderlist = res.data.data.content;
+              }
+        })
+        }
+      })*/
+
+    },
+    onReachBottom(){
+      console.log('ssss')
+      this.pageIndex++;
+      if(!this.isLoadedAll){
+        console.log(this.pageIndex)
+        this.getOrderList()
+      }
+
+
+    },
+
+
+    /*getOrderList(){
+      wx.getStorage({
+        key: "openid",
+        success:(res)=> {
+          //console.log(res.data)
+          let entity = {
+            "page": this.pageIndex,
+            "size": 15,
+            "sort": "string",
+            "userOpenId": res.data
+          }
+          wx.request({
+            url:"https://api.ypaot.com/api/v1/assist-get/order/list",
+            data: entity,
+            method: "POST",
+            header: {
+              'content-type': 'application/json'
+            },
+            success:(res)=> {
+              console.log(res);
+              this.orderlist = this.orderlist.concat(res.data.data.content);
+            }
+          })
+        }
+      })
+    },*/
+
     methods:{
+      getOrderList(){
+        wx.getStorage({
+          key: "openid",
+          success:(res)=> {
+            //console.log(res.data)
+            let entity = {
+              "page": this.pageIndex,
+              "size": 15,
+              "userOpenId": res.data
+            }
+            wx.request({
+              url:"https://api.ypaot.com/api/v1/assist-get/order/list",
+              data: entity,
+              method: "POST",
+              header: {
+                'content-type': 'application/json'
+              },
+              success:(res)=> {
+                console.log(res);
+
+                console.log(res.data.data.content.length)
+                if(res.data.data.content.length>0){
+                this.orderlist = this.orderlist.concat(res.data.data.content);
+                }else{
+                  this.isLoadedAll = true;
+                }
+              }
+            })
+          }
+        })
+      },
+      execSetStorageSync(data){
+        wx.setStorageSync(this.storageKeyName,data);
+      },
+      hasNewOrder(){
+        var flag = wx.getStorageSync(this.storageKeyName);
+        return flag == true;
+      },
+      /*下拉刷新页面*/
+      onPullDownRefresh(){
+        //let that=this;
+        this.orderlist=[];  //订单初始化
+      /*  this._getOrders(()=>{
+          that.data.isLoadedAll=false;  //是否加载完全
+          that.data.pageIndex=1;
+          wx.stopPullDownRefresh();
+          order.execSetStorageSync(false);  //更新标志位
+        });*/
+      },
       onChange(event){
-        console.log(event)
+        /*console.log()
         wx.showToast({
           title:'切换到标签${event.detail.index+1}',
           icon:'none'
-        })
+        })*/
+        console.log('切换')
+      },
+      selectItem(item){
+        console.log(item)
       }
-
     }
   };
 </script>
@@ -133,5 +358,7 @@
     margin-bottom: 10px;
     border-bottom: 1rpx solid #ECECEC;
   }
+
+
 
 </style>
