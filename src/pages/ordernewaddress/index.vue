@@ -35,6 +35,7 @@
   export default {
     data:()=>{
       return {
+        storageAddressKeyName:"address",
         show:false,
         AreaList: {
           province_list: {
@@ -184,13 +185,13 @@
       }
     },
     onLoad(){
-      wx.getStorage({
+  /*    wx.getStorage({
         key:"openid",
         success:(res)=> {
           console.log(res.data);
           this.add.userOpenId=res.data;
         }
-      })
+      })*/
     },
     methods: {
       changePhone(value) {
@@ -232,7 +233,7 @@
       },
 
       addsubmit(){
-        let self = this;
+/*        let self = this;
         let entity={
           "userOpenId": self.add.userOpenId,
           "receiverName": self.add.name,
@@ -243,23 +244,44 @@
           "receiverCity": self.add.city,
           "receiverDistrict": self.add.district
         };
-        console.log(entity)
-        wx.request({
-          url:"https://api.ypaot.com/api/v1/service-user/receive-info",
-          data: entity,
-          method: "POST",
-          header:{
-            'content-type': 'application/json'
-          },
-          success(res) {
-            console.log(res)
-            wx.navigateBack({
+        console.log(entity)*/
+        wx.getStorage({
+          key: "openid",
+          success:(res)=> {
+            let self = this;
+            let entity={
+              "userOpenId":res.data,
+              "receiverName": self.add.name,
+              "receiverCollegeName":self.add.colleage,
+              "receiverMobile":self.add.phone,
+              "receiverAddress":self.add.address,
+              "receiverProvince": self.add.province,
+              "receiverCity": self.add.city,
+              "receiverDistrict": self.add.district
+            };
+            wx.request({
+              url:"https://api.ypaot.com/api/v1/service-user/receive-info",
+              data: entity,
+              method: "POST",
+              header:{
+                'content-type': 'application/json'
+              },
+              success:(res)=> {
+                this.execSetAddressStorageSync(true);
+                console.log(res)
+                wx.navigateBack({
 
+                })
+              }
             })
           }
         })
 
-      }
+
+      },
+      execSetAddressStorageSync(data){
+        wx.setStorageSync(this.storageAddressKeyName,data);
+      },
     }
   };
 </script>

@@ -38,6 +38,7 @@
     name: "index",
     data:()=>{
       return {
+        storageAddressKeyName:"address",
         show:false,
         AreaList: {
           province_list: {
@@ -255,13 +256,14 @@
         console.log(entity)
 
         wx.request({
-          url:"http://188.131.244.83/api/v1/service-user/receive-info",
+          url:"https://api.ypaot.com/api/v1/service-user/receive-info",
           data: entity,
           method: "PUT",
           header: {
             'content-type': 'application/json'
           },
-          success(res) {
+          success:(res)=> {
+            this.execSetAddressStorageSync(true);
             console.log(res)
             wx.navigateTo({
               url:"/pages/address/main"
@@ -273,7 +275,7 @@
         console.log('delete')
         console.log(this.add.id)
         wx.request({
-          url:"http://188.131.244.83/api/v1/service-user/receive-info",
+          url:"https://api.ypaot.com/api/v1/service-user/receive-info",
           data:{
             "id": this.add.id
           },
@@ -281,14 +283,18 @@
           header: {
             'content-type': 'application/json'
           },
-          success(res) {
+          success:(res)=> {
+            this.execSetAddressStorageSync(true);
             console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
+            wx.navigateBack({
+              //url:"/pages/address/main"
             })
           }
         })
-      }
+      },
+      execSetAddressStorageSync(data){
+        wx.setStorageSync(this.storageAddressKeyName,data);
+      },
     },
 
   };

@@ -6,7 +6,7 @@
       </div>
     </div>
     <van-cell-group>
-      <van-cell title="我的订单" icon="point-gift-o" is-link @click=""></van-cell>
+      <van-cell title="我的订单" icon="point-gift-o" is-link @click="selectOrder"></van-cell>
       <van-cell title="我的收货地址" icon="location-o" is-link @click="selectAddress"></van-cell>
       <van-cell title="客服电话" icon="phone-o" is-link value="10086" @click=""></van-cell>
       <van-cell title="退出账号" icon="smile-o" is-link @click=""></van-cell>
@@ -215,6 +215,11 @@
       wx.navigateTo({
         url:"/pages/address/main"
       })
+      },
+      selectOrder(){
+        wx.switchTab({
+          url: "/pages/order/main"
+        })
       },
 
       //激活新增地址

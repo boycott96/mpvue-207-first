@@ -65,6 +65,7 @@
   export default {
     data: () => {
       return {
+        storageAddressKeyName:"address",
         storageKeyName:"newOrder",
         addressTitle: "",
         isSelectAddress: true,
@@ -196,8 +197,12 @@
     },
     onShow() {
       console.log("----onshow---");
+      let newAddress = this.hasNewAddress();
+      if(newAddress || this.addressData.length == 0){
+        this.getaddresslist();
+        this.execSetAddressStorageSync(false);
+      }
 
-      this.getaddresslist()
       console.log("地址");
 
     },
@@ -219,8 +224,9 @@
               url:"https://api.ypaot.com/api/v1/service-user/receive-info/list/"+res.data,
               method: "GET",
               success:(res)=>{
-                console.log(res.data.data)
-                this.addressData = res.data.data
+                console.log('请求');
+                console.log(res.data.data);
+                this.addressData = res.data.data;
               }
             })
           }
@@ -228,9 +234,8 @@
       },
       //激活选择地址
       selectAddress() {
-
         this.addressShow = true;
-        console.log(this.addressData)
+        //console.log(this.addressData)
 
 /*        wx.getStorage({
           key:"openid",
@@ -289,11 +294,13 @@
           },
           //dataType: "json",
           success:(res)=> {
-            console.log(res.data);
+
+            console.log(res.data.data.id);
             this.execSetStorageSync(true);
 
             wx.navigateTo({
-              url:"/pages/payinfo/main?data="+JSON.stringify(res.data.data)
+              //url:"/pages/payinfo/main?data="+JSON.stringify(res.data.data)
+              url:"/pages/payinfo/main?id="+res.data.data.id
             })
           }
         })
@@ -337,6 +344,13 @@
         //this.submit.address=data.city;
 
 
+      },
+      execSetAddressStorageSync(data){
+        wx.setStorageSync(this.storageAddressKeyName,data);
+      },
+      hasNewAddress(){
+        let flag = wx.getStorageSync(this.storageAddressKeyName);
+        return flag == true;
       },
 
       //选中地址事件

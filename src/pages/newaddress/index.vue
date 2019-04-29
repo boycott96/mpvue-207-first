@@ -35,6 +35,7 @@
   export default {
     data:()=>{
       return {
+        storageKeyName:"address",
         show:false,
         AreaList: {
           province_list: {
@@ -251,15 +252,19 @@
           header:{
             'content-type': 'application/json'
           },
-          success(res) {
+          success:(res)=> {
+            this.execSetAddressStorageSync(true);
             console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
+            wx.navigateBack({
+              //url:"/pages/address/main"
             })
           }
         })
 
-      }
+      },
+      execSetAddressStorageSync(data){
+        wx.setStorageSync(this.storageKeyName,data);
+      },
     }
   };
 </script>

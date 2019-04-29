@@ -7,7 +7,10 @@
               <van-card :num="item.expressCount" :price="item.orderPayment"  :desc="item.createTime" :title="item.expressCompany" :thumb="imageURL" @click="selectItem(item)">
                 <view slot="footer">
                   <van-button size="mini">删除</van-button>
-                  <van-button size="mini" style="color: #07c160">{{item.orderStatus==0 ? "待付款": "去评价"}}</van-button>
+                  <!--<van-button size="mini" style="color: #07c160">{{item.orderStatus==0 ? "待付款": "去评价"}}</van-button>-->
+                  <van-button v-if="item.orderStatus==0" size="mini" style="color: #07c160">待付款</van-button>
+                  <van-button v-if="item.orderStatus==1" size="mini" style="color: #07c160">已付款</van-button>
+                  <van-button v-if="item.orderStatus==2" size="mini" style="color: #07c160">订单失效</van-button>
                 </view>
               </van-card>
         </van-cell-group>
@@ -42,6 +45,7 @@
   export default {
     data(){
       return {
+        isDownLoading:true,
         active:1,
         imageURL:"/static/images/sf.jpg",
         orderlist: [
@@ -145,8 +149,9 @@
     },
     onShow(){
       console.log('onShow')
+      //console.log(this.orderlist);
       let newOrderFlag = this.hasNewOrder();
-      if(newOrderFlag){
+      if(newOrderFlag||this.orderlist.length==0){
         this.onPullDownRefresh();
         this.pageIndex=1;
         this.getOrderList();
@@ -260,6 +265,7 @@
       /*下拉刷新页面*/
       onPullDownRefresh(){
         //let that=this;
+        this.isLoadedAll = false;
         this.orderlist=[];  //订单初始化
       /*  this._getOrders(()=>{
           that.data.isLoadedAll=false;  //是否加载完全
@@ -277,7 +283,12 @@
         console.log('切换')
       },
       selectItem(item){
+        console.log('************')
         console.log(item)
+        wx.navigateTo({
+          //url:"/pages/payinfo/main?data="+JSON.stringify(item)
+          url:"/pages/payinfo/main?id="+item.id
+        })
       }
     }
   };
