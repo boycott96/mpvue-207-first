@@ -289,19 +289,23 @@
           //url:"/pages/payinfo/main?data="+JSON.stringify(item)
           url:"/pages/payinfo/main?id="+item.id
         })
-      }
+      },
+      renderTime(date) {
+        var dateee = new Date(date).toJSON();
+        return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+      },
     }
   };
 </script>
 
 <style>
   .div{
-    /*width: 100%;*/
-    /*padding: 15rpx;*/
-    /*border: 100rpx 0;*/
-    border-style: solid;
-    border-color: #ECECEC;
-  }
+      /*width: 100%;*/
+      /*padding: 15rpx;*/
+      /*border: 100rpx 0;*/
+      border-style: solid;
+      border-color: #ECECEC;
+    }
   .div1{
     width: 100%;
     height: 70rpx;

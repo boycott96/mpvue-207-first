@@ -190,16 +190,19 @@
     onLoad(options){
       console.log('options')
       //console.log(options)
-      let data = JSON.parse(options.item)
-      console.log(data)
-      this.add.name=data.receiverName,
+      let data = JSON.parse(options.item);
+      console.log(data);
+      this.add.name=data.receiverName;
         //this.add.city=data.receiverCollegeName,
-        this.add.address=data.receiverAddress,
-        this.add.phone = data.receiverMobile,
-        this.add.colleage = data.receiverCollegeName,
-        this.add.userOpenId = data.userOpenId,
-        this.add.id = data.id,
-        this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict
+        this.add.address=data.receiverAddress;
+        this.add.phone = data.receiverMobile;
+        this.add.colleage = data.receiverCollegeName;
+        this.add.userOpenId = data.userOpenId;
+        this.add.id = data.id;
+        this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict;
+        this.add.province = data.receiverProvince;
+        this.add.city = data.receiverCity;
+        this.add.district = data.receiverDistrict;
     },
     methods: {
       changePhone(value) {

@@ -34,9 +34,9 @@
           console.log('kkkk')
           if(res.data){
             console.log(res.data)
-            /*wx.switchTab({
+            wx.switchTab({
               url:'/pages/index/main'
-            })*/
+            })
           }
         }
       })

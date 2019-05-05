@@ -188,18 +188,21 @@
       }
     },
     onLoad(options){
-      console.log('options')
+      console.log('options');
       //console.log(options)
-      let data = JSON.parse(options.item)
+      let data = JSON.parse(options.item);
       console.log(data)
-          this.add.name=data.receiverName,
+          this.add.name=data.receiverName;
           //this.add.city=data.receiverCollegeName,
-          this.add.address=data.receiverAddress,
-          this.add.phone = data.receiverMobile,
-          this.add.colleage = data.receiverCollegeName,
-          this.add.userOpenId = data.userOpenId,
-          this.add.id = data.id,
-          this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict
+          this.add.address=data.receiverAddress;
+          this.add.phone = data.receiverMobile;
+          this.add.colleage = data.receiverCollegeName;
+          this.add.userOpenId = data.userOpenId;
+          this.add.id = data.id;
+          this.add.area = data.receiverProvince+data.receiverCity+data.receiverDistrict;
+      this.add.province = data.receiverProvince;
+      this.add.city = data.receiverCity;
+      this.add.district = data.receiverDistrict;
     },
     methods: {
       changePhone(value) {
@@ -237,7 +240,11 @@
         this.add.district = data.mp.detail.values[2].name;
       },
       addsubmit(){
+
         let self = this;
+        console.log(self.add.province+'sss');
+        console.log(self.add.city+"qqq");
+        console.log(self.add.district+"xxx");
         console.log(this.add)
         console.log('lll')
         //console.log(self.add)
@@ -265,8 +272,8 @@
           success:(res)=> {
             this.execSetAddressStorageSync(true);
             console.log(res)
-            wx.navigateTo({
-              url:"/pages/address/main"
+            wx.navigateBack({
+              //url:"/pages/address/main"
             })
           }
         })

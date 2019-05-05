@@ -1,6 +1,6 @@
 {
   "pages": [
-
+    "pages/shouquan/main",
     "pages/index/main",
     "pages/order/main",
     "pages/counter/main",
@@ -11,7 +11,7 @@
     "pages/submit/main",
     "pages/item/main",
     "pages/payinfo/main",
-    "pages/shouquan/main",
+
     "pages/newaddress/main",
     "pages/orderaddress/main",
     "pages/ordernewaddress/main"
